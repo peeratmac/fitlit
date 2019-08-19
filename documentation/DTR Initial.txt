@@ -1,0 +1,31 @@
+FitLit Paired Project DTR
+Turing School of Software and Design
+1906 FEE
+MOD 2 
+
+Peerat Sukcharoenyingyong
+Kirk Veitch
+
+Learning goals:
+Implement ES6 functions and 
+Be able to manipulate larger data sets
+Deepen understanding of inter-object communication
+
+Collaboration style: Primarily divide and conquer with paired programming when starting new phases
+
+Communication: Morning check in, with evening retro.  Mostly verbal communication important list should sent via slack
+
+Work-styles: K: Very sporadic with initial burst of productivity.
+P: Steady, consistent production.
+
+Feedback: K:coaching, P:goal oriented, specific
+
+Repo will be on Peerat GitHub.
+
+Tools: GitHub issues and Trello
+
+Project Goals: Minimum of 3 on all rubric categories
+	Additional Nice to have:
+	Functionality: Phase 5 with an extension.
+	JS & Style: Strong understanding of classes and array prototype methods.
+	TDD: write concise appropriate testing
