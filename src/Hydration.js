@@ -3,13 +3,14 @@ class Hydration {
     this.data = data;
   }
 
+  // get all the data from the specific user (all dates)
   filterUser(idNumber) {
     return this.data.filter(user => user.userID === idNumber);
   }
 
-  getDailyWaterIntake(id, date) {
+  getDailyWaterIntake(idNumber, date) {
     let theUser = this.data.find(
-      user => user.userID === id && user.date === date
+      user => user.userID === idNumber && user.date === date
     );
     return theUser.numOunces;
   }

@@ -3,6 +3,7 @@ class HydrationRepository {
     this.data = data;
   }
 
+  // get the first user found (might not need this?)
   getUserByID(idNumber) {
     return this.data.find(user => user.userID === idNumber);
   }
