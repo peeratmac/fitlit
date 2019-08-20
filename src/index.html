@@ -10,9 +10,20 @@
   <body>
     <header>
         <h1>FitLit</h1>
-        <p>Peerat</p><p>Today's Date <img src=""></p>
+        <p class="user-name"></p><p class="date-today"><img src=""></p>
     </header>
     <main>
+      <section class="user-info"><h2>Hi <span class="user-first-name"></span></h2>
+        <p>email: <span class="email"></span></p>
+        <p>Address: <span class="address"></span></p>
+        <p>Stride Length: <span class="stride"></span></p>
+        <p>Daily Step Goal: <span class="user-step-goal"></span></p>
+        <p>You have walked <span class="distance">XX</span> miles today.</p>
+        <p>You have taken <span class="current-steps">XX</span> steps of your goal <span class="step-goal-card"></span> step goal.</p>
+        <p>You have been active for 
+          <span class="current-activity">XX</span> minutes and have climbed 
+          <span class="current-flight-of-stairs">XX</span> flights of stairs.</p>
+      </section>
       <section id="hydration">
         <h2>Hydration</h2>
       </section>
@@ -23,13 +34,31 @@
       <section id="steps"><h2>Steps</h2></section>
       <section id="trend"><h2>Trend</h2></section>
       <section id="step-increase"><h2>Days getting better</h2></section>
-      <section id="comparison"><h2>You vs. the World</h2></section>
+      <section id="comparison">
+        <h2>You vs. the World</h2>
+        <h3>Step Goals</h3>
+        <p>You: <span class="user-step-goal"></span> steps. The World: 
+          <span class="average-all-step-goal"></span>steps.
+        </p>
+        <p>Your goal is <span class="step-goal-percent"></span>% of the global average.</p>
+        </section>
+      </section>
       <section id="friends">
         <h2>Friends</h2>
         <container><h3>Friends List</h3></container>
         <container><h3>Winning</h3></container>
       </section>
     </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./User.js"></script>
+    <script type="text/javascript" src="./User-repository.js"></script>
+    <script type="text/javascript" src="../subset-data/activity.js"></script>
+    <script type="text/javascript" src="../subset-data/hydration.js"></script>
+    <script type="text/javascript" src="../subset-data/users.js"></script>
+    <script type="text/javascript" src="../subset-data/sleep.js"></script>
+
+    <!-- <script type="text/javascript" src="./Hydration.js"></script> -->
     <script type="text/javascript" src="./scripts.js"></script>
   </body>
 </html>
