@@ -13,4 +13,7 @@ class UserRepository {
   }
 }
 
-module.exports = UserRepository;
+// module.exports = UserRepository;
+if (typeof module !== 'undefined') {
+  module.exports = UserRepository;
+}
