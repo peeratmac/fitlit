@@ -1,1 +1,3 @@
-console.log('Hello World');
+//All DOM manipulation
+
+console.log("Hello World");
