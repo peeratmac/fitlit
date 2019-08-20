@@ -1,10 +1,10 @@
 //All DOM manipulation
 
 
-let userId = 4
+let userId = Math.ceil(Math.random()*10)
 const todayDate = '2019/09/22';
 const userRepo = new UserRepository(userData);
-const user = userRepo.getUserByID(userId);
+const user = userRepo.getUserByID(5);
 const currentUser = new User(user);
 const dailyStepGoal = currentUser.dailyStepGoal;
 const globalStepAverage = userRepo.averageUserStepGoal()
@@ -17,8 +17,8 @@ $('.average-all-step-goal').text(userRepo.averageUserStepGoal());
 $('.date-today').text(todayDate);
 $('.step-goal-card').text(currentUser.dailyStepGoal);
 $('.step-goal-percent').text(percentGlobalSteps);
-$('.email').text(currentUser.email);
 $('.address').text(currentUser.address);
+$('.email').text(currentUser.email);
 $('.stride').text(currentUser.strideLength);
 // $('.current-steps').text()
 
