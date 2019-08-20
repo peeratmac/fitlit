@@ -92,3 +92,5 @@ const userData = [
     friends: [5, 7]
   }
 ];
+
+module.exports = userData;
