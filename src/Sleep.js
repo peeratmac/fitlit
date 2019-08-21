@@ -79,25 +79,28 @@ class Sleep {
   getGoodSleepers(date) {
     let goodSleepers = [];
     // console.log(this.data)
-    let idList = this.data.map(sleep => sleep.userID).reduce((acc, idNumber)=> {
-      if (!acc.includes(idNumber)) acc.push(idNumber);
-      return acc;
-    },[]);
+    let idList = this.data
+      .map(sleep => sleep.userID)
+      .reduce((acc, idNumber) => {
+        if (!acc.includes(idNumber)) acc.push(idNumber);
+        return acc;
+      }, []);
     idList.forEach(id => {
-      if (this.getWeeklyQualities(date, id).reduce((a, b)=> a + b, 0 ) / 7 > 3) goodSleepers.push(id);
+      if (this.getWeeklyQualities(date, id).reduce((a, b) => a + b, 0) / 7 > 3)
+        goodSleepers.push(id);
     });
 
-    return goodSleepers
+    return goodSleepers;
   }
 
   getTopSleeper(date) {
     let dateData = this.data.filter(sleep => sleep.date === date);
-    dateData.sort((sleepA,sleepB)=> sleepB.hoursSlept - sleepA.hoursSlept);
+    dateData.sort((sleepA, sleepB) => sleepB.hoursSlept - sleepA.hoursSlept);
 
-    return dateData[0].hoursSlept > dateData[1].hoursSlept ? [dateData[0].userID] : [dateData[0].userID,dateData[1].userID];   
+    return dateData[0].hoursSlept > dateData[1].hoursSlept
+      ? [dateData[0].userID]
+      : [dateData[0].userID, dateData[1].userID];
   }
-
-
 }
 
 if (typeof module !== 'undefined') {

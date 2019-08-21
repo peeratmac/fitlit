@@ -3,38 +3,73 @@ class Activity {
     this.data = activityData;
   }
 
-  calculateMilesWalked(date, id) {
-    let stepsTaken = this.data.find(active => active.date === date && active.userID === id).numSteps
-    let stride = 1;
-
-    return Number((stepsTaken*stride/5280).toFixed(1))
+  getUserActivityData(idNumber) {
+    return this.data.filter(active => active.userID === idNumber);
   }
 
-  getMinutesActive(date, id) {}
+  calculateMilesWalked(date, user) {
+    let stepsTaken = this.data.find(
+      active => active.date === date && active.userID === user.id
+    ).numSteps;
 
-  getWeekAverageActivity(date, id) {}
+    return Number(((stepsTaken * user.strideLength) / 5280).toFixed(1));
+  }
 
-  checkStepGoal(date, id) {}
+  getMinutesActive(date, idNumber) {
+    let userData = this.getUserActivityData(idNumber);
+    let minutesActive = userData.find(active => active.date === date)
+      .minutesActive;
 
-  findExceedStepGoal(id) {}
+    return minutesActive;
+  }
 
-  getMostStairsClimbed(id) {}
+  getWeekAverageActivity(date, idNumber) {
+    let userData = this.getUserActivityData(idNumber);
+    let lastDay;
+    userData.forEach((activity, index) =>
+      activity.date === date ? (lastDay = index) : null
+    );
+    let weekly = userData.slice(lastDay - 6, lastDay + 1);
+    let weeklyActivityMinutes =
+      weekly.reduce((acc, active) => {
+        acc += active.minutesActive;
+        return acc;
+      }, 0) / 7;
+
+    return Number(weeklyActivityMinutes.toFixed(1));
+  }
+
+  checkStepGoal(date, user) {
+    let userData = this.getUserActivityData(user.id);
+    let activeDay = userData.find(active => active.date === date);
+    return activeDay.numSteps >= user.dailyStepGoal ? true : false;
+  }
+
+  findExceedStepGoal(user) {
+    let daysExceedStepGoal = this.data.filter(
+      active =>
+        active.userID === user.id && active.numSteps > user.dailyStepGoal
+    );
+
+    return daysExceedStepGoal.map(active => active.date);
+  }
+
+  getMostStairsClimbed(idNumber) {
+    let userData = this.getUserActivityData(idNumber);
+    let maxFlights = Math.max(
+      ...userData.map(active => active.flightsOfStairs)
+    );
+    return maxFlights;
+  }
 
   getAllUserAverage(date, property) {
     let allUserDateData = this.data.filter(active => active.date === date);
-    return allUserDateData.reduce((acc, active)=> acc + active[property], 0) / allUserDateData.length
+    return (
+      allUserDateData.reduce((acc, active) => acc + active[property], 0) /
+      allUserDateData.length
+    );
   }
-
-
 }
-
-
-
-
-
-
-
-
 
 if (typeof module !== 'undefined') {
   module.exports = Activity;
