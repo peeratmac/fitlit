@@ -43,7 +43,12 @@ describe('SLEEP', () => {
   });
 
   it('should find all users who average sleep quality greater than 3 for a given week', () => {
-    let goodSleepers = [1, 3, 4, 7, 8];
-    expect(sleep.getGoodSleepers()).to.eql(goodSleepers);
+    let goodSleepers = [ 2, 3, 5, 6, 7, 8 ];
+    expect(sleep.getGoodSleepers('2019/06/22')).to.eql(goodSleepers);
   });
+
+  it.only('shoould be able to find the top sleeper for a given date', () =>{
+    expect(sleep.getTopSleeper('2019/06/16')).to.eql([3])
+    expect(sleep.getTopSleeper('2019/06/20')).to.eql([2, 5])
+  })
 });
