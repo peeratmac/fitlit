@@ -40,7 +40,7 @@ describe('ACTIVITY', () => {
     expect(activity.findExceedStepGoal(user1)).to.eql(days);
   });
 
-  it.only("should find a user's all-time stair climbing record", () => {
+  it("should find a user's all-time stair climbing record", () => {
     expect(activity.getMostStairsClimbed(user2ID)).to.equal(44);
   });
 
