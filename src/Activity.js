@@ -69,6 +69,14 @@ class Activity {
       allUserDateData.length
     );
   }
+
+  calculateStepGoalAchievement(user) {
+    let userData = this.getUserActivityData(user.id);
+    let daysAchieved = userData.filter(day => {
+      return day.numSteps > user.dailyStepGoal;
+    });
+    return Math.ceil((daysAchieved.length / userData.length) * 100);
+  }
 }
 
 if (typeof module !== 'undefined') {
