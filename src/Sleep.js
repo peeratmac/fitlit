@@ -93,7 +93,6 @@ class Sleep {
   getTopSleeper(date) {
     let dateData = this.data.filter(sleep => sleep.date === date);
     dateData.sort((sleepA,sleepB)=> sleepB.hoursSlept - sleepA.hoursSlept);
-    console.log(dateData[0].hoursSlept, dateData[1].hoursSlept, dateData[2].hoursSlept , dateData[3].hoursSlept)
 
     return dateData[0].hoursSlept > dateData[1].hoursSlept ? [dateData[0].userID] : [dateData[0].userID,dateData[1].userID];   
   }

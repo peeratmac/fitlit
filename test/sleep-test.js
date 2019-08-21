@@ -47,7 +47,7 @@ describe('SLEEP', () => {
     expect(sleep.getGoodSleepers('2019/06/22')).to.eql(goodSleepers);
   });
 
-  it.only('shoould be able to find the top sleeper for a given date', () =>{
+  it('shoould be able to find the top sleeper for a given date', () =>{
     expect(sleep.getTopSleeper('2019/06/16')).to.eql([3])
     expect(sleep.getTopSleeper('2019/06/20')).to.eql([2, 5])
   })
