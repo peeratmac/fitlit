@@ -40,7 +40,7 @@ describe('ACTIVITY', () => {
     expect(activity.findExceedStepGoal(user1)).to.eql(days);
   });
 
-  it.only("should find a user's all-time stair climbing record", () => {
+  it("should find a user's all-time stair climbing record", () => {
     expect(activity.getMostStairsClimbed(user2ID)).to.equal(44);
   });
 
@@ -54,5 +54,9 @@ describe('ACTIVITY', () => {
     expect(
       activity.getAllUserAverage('2019/06/20', 'flightsOfStairs')
     ).to.equal(25.5);
+  });
+
+  it.only('should calculate how often a user achieve their step goal in percentage', () => {
+    expect(activity.calculateStepGoalAchievement(user2)).to.equal(50);
   });
 });

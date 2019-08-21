@@ -101,6 +101,23 @@ class Sleep {
       ? [dateData[0].userID]
       : [dateData[0].userID, dateData[1].userID];
   }
+
+  calculateSleepScore(date, idNumber) {
+    let userSleepData = this.getUserSleepData(idNumber);
+    let selectedNightSleep = userSleepData.find(night => night.date === date);
+    let sleepScore =
+      selectedNightSleep.hoursSlept * selectedNightSleep.sleepQuality;
+    return sleepScore;
+  }
+
+  getWeeklySleepScores(date, idNumber) {
+    let weeklySleeps = this.getWeeklySleeps(date, idNumber);
+    let weeklyQualities = this.getWeeklyQualities(date, idNumber);
+
+    return weeklySleeps.map((hour, index) => {
+      return Number((hour * weeklyQualities[index]).toFixed(2));
+    });
+  }
 }
 
 if (typeof module !== 'undefined') {
