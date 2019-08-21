@@ -66,7 +66,7 @@ describe('HYDRATION', () => {
       78
     ]);
   });
-  it.only('should calculate the average fluid consumed per day for all time', () => {
+  it('should calculate the average fluid consumed per day for all time', () => {
     let hydrationRepo = new HydrationRepository(hydrationData);
     let userDataHydrations = hydrationRepo.getUserHydrationByID(3);
     let userDataHydrations2 = hydrationRepo.getUserHydrationByID(6);

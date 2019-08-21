@@ -13,6 +13,7 @@ const hydrationRepo = new HydrationRepository(hydrationData);
 const userDataHydrations = hydrationRepo.getUserHydrationByID(userId);
 const hydrationUser = new Hydration(userDataHydrations);
 const dailyWaterIntake = hydrationUser.getDailyWaterIntake('2019/06/22');
+const weeklyWaterIntake = hydrationUser.getWeeklyWaterIntake();
 
 $('.user-name').text(currentUser.name);
 $('.user-first-name').text(currentUser.getFirstName());
@@ -25,4 +26,5 @@ $('.address').text(currentUser.address);
 $('.email').text(currentUser.email);
 $('.stride').text(currentUser.strideLength);
 $('.water').text(dailyWaterIntake);
+$('.water-history').text(weeklyWaterIntake.join('oz, ') + 'oz');
 // $('.current-steps').text()
