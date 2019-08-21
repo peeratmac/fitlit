@@ -18,11 +18,11 @@
         <p>Address: <span class="address"></span></p>
         <p>Stride Length: <span class="stride"></span></p>
         <p>Daily Step Goal: <span class="user-step-goal"></span></p>
-        <p>You have walked <span class="distance">XX</span> miles today.</p>
-        <p>You have taken <span class="current-steps">XX</span> steps of your goal <span class="step-goal-card"></span> step goal.</p>
+        <p>You have walked <span class="distance"></span> miles today.</p>
+        <p>You have taken <span class="current-steps"></span> steps of your goal <span class="step-goal-card"></span> step goal.</p>
         <p>You have been active for 
-          <span class="current-activity">XX</span> minutes and have climbed 
-          <span class="current-flight-of-stairs">XX</span> flights of stairs.</p>
+          <span class="current-activity"></span> minutes and have climbed 
+          <span class="current-flight-of-stairs"></span> flights of stairs.</p>
       </section>
       <section id="hydration">
         <h2>Hydration</h2>
@@ -31,10 +31,13 @@
       </section>
       <section id="sleep">
         <h2>Sleep</h2>
-        <p>You have slept for <span class="user-sleep"></span> hours.</p>
-        <h3>Last 7 Days</h3>
-        <p>You have been sleeping on average for <span class="user-sleep-average"></span> hours.</p>
-        <p>The sleep quality on average were rated at <span class="user-quality-average"></span> points.</p>
+        <p>You slept for <span class="user-sleep"></span> hours last night.</p><br>
+        <h3>Sleep Statisics For The Last 7 Days</h3>
+        <p>You have been sleeping on average for <span class="user-sleep-average"></span> hours.</p><br>
+        <p>Last weeks sleep was rates at <span class="jq-week-quality"></span> points.</p>
+        <h3>Your All Time Average Sleep Stats</h3>
+        <p>Average Hours Slept: <span class="jq-all-time-sleep-average"></span></p>
+        <p>Average Quality of Sleep: <span class="jq-all-time-quality-average"></span></p>
       </section>
       <section id="activity"><h2>Activity</h2></section>
       <section id="steps"><h2>Steps</h2></section>
@@ -60,9 +63,9 @@
     <script type="text/javascript" src="./User.js"></script>
     <script type="text/javascript" src="./User-repository.js"></script>
     <script type="text/javascript" src="../subset-data/activity.js"></script>
-    <script type="text/javascript" src="../subset-data/hydration.js"></script>
-    <script type="text/javascript" src="../subset-data/users.js"></script>
-    <script type="text/javascript" src="../subset-data/sleep.js"></script>
+    <script type="text/javascript" src="../data/hydration.js"></script>
+    <script type="text/javascript" src="../data/users.js"></script>
+    <script type="text/javascript" src="../data/sleep.js"></script>
     <script type="text/javascript" src="./Hydration.js"></script>
     <script type="text/javascript" src="./Hydration-repository.js"></script>
     <script type="text/javascript" src="./Sleep.js"></script>
