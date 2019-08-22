@@ -63,20 +63,6 @@ describe('SLEEP', () => {
     expect(sleeper1.getWeeklyQualities('2019/06/21')).to.eql(qualities2);
   });
 
-  // it('should be able to calculate the average sleep quality to one decimal', () => {
-  //   expect(sleep.getGroupAverageQuality()).to.equal(3);
-  // });
-
-  // it('should find all users who average sleep quality greater than 3 for a given week', () => {
-  //   let goodSleepers = [2, 3, 5, 6, 7, 8];
-  //   expect(sleep.getGoodSleepers('2019/06/22')).to.eql(goodSleepers);
-  // });
-
-  // it('should be able to find the top sleeper for a given date', () => {
-  //   expect(sleep.getTopSleeper('2019/06/16')).to.eql([3]);
-  //   expect(sleep.getTopSleeper('2019/06/20')).to.eql([2, 5]);
-  // });
-
   it('should calculate sleep score of a user for a given date', () => {
     expect(sleeper1.calculateSleepScore('2019/06/20')).to.equal(11.16);
   });
