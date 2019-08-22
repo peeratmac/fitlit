@@ -11,7 +11,6 @@ class Activity {
     let stepsTaken = this.data.find(
       active => active.date === date && active.userID === user.id
     ).numSteps;
-
     return Number(((stepsTaken * user.strideLength) / 5280).toFixed(1));
   }
 
@@ -64,7 +63,7 @@ class Activity {
 
   getAllUserAverage(date, property) {
     let allUserDateData = this.data.filter(active => active.date === date);
-    return (
+    return parseInt(
       allUserDateData.reduce((acc, active) => acc + active[property], 0) /
       allUserDateData.length
     );
@@ -76,6 +75,11 @@ class Activity {
       return day.numSteps > user.dailyStepGoal;
     });
     return Math.ceil((daysAchieved.length / userData.length) * 100);
+  }
+
+  returnCurrentActivityDatum(date, idNumber, activity) {
+    return this.data.filter(active => active.userID === idNumber)
+    .find(e => e.date === date)[activity]
   }
 }
 

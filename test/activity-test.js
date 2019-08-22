@@ -56,7 +56,7 @@ describe('ACTIVITY', () => {
     ).to.equal(25.5);
   });
 
-  it.only('should calculate how often a user achieve their step goal in percentage', () => {
+  it('should calculate how often a user achieve their step goal in percentage', () => {
     expect(activity.calculateStepGoalAchievement(user2)).to.equal(50);
   });
 });
