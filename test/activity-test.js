@@ -56,7 +56,22 @@ describe('ACTIVITY', () => {
     ).to.equal(25.5);
   });
 
-  it.only('should calculate how often a user achieve their step goal in percentage', () => {
+  it('should calculate how often a user achieve their step goal in percentage', () => {
     expect(activity.calculateStepGoalAchievement(user2)).to.equal(50);
+  });
+
+  it('should give out friends steps', () => {
+    expect(activity.getWeeklySteps('2019/06/21', user2ID)).to.equal(55054);
+  });
+
+  it('should return the dates where user had increased steps for the previous 3 days', () => {
+    let daysTrend = ['2019/06/18', '2019/06/19'];
+    expect(activity.getDaysWithStepsTrend(8)).to.eql(daysTrend);
+  });
+
+  it('should return lifetime miles and calculate how many times the hikes were completed based on lifetime miles', () => {
+    expect(activity.compareMilesWalkedToHike(user1ID, user1)).to.equal(
+      'Your 56.1 lifetime miles is equivalent to 3.8 times you have done Mount Rainier Standard Summit Hike'
+    );
   });
 });
