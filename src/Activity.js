@@ -77,6 +77,61 @@ class Activity {
     });
     return Math.ceil((daysAchieved.length / userData.length) * 100);
   }
+
+  // * Iteration 5 (this is giving you the total steps for the last 7 days)
+  getWeeklySteps(date, idNumber) {
+    let userData = this.getUserActivityData(idNumber);
+    let lastDay;
+    userData.forEach((activity, index) =>
+      activity.date === date ? (lastDay = index) : null
+    );
+    let weekly = userData.slice(lastDay - 6, lastDay + 1);
+    let totalWeeklySteps = weekly.reduce((acc, active) => {
+      acc += active.numSteps;
+      return acc;
+    }, 0);
+    return totalWeeklySteps;
+  }
+
+  // * What days had increasing steps for 3 or more days, for a user.
+  getDaysWithStepsTrend(idNumber) {
+    let userData = this.getUserActivityData(idNumber);
+    let daysTrend = userData.reduce((acc, day, index) => {
+      if (index < 2) {
+        return acc;
+      }
+      console.log(day.numSteps);
+      console.log(userData[index - 1].numSteps);
+      console.log(userData[index - 2].numSteps);
+      if (
+        day.numSteps > userData[index - 1].numSteps &&
+        userData[index - 1].numSteps > userData[index - 2].numSteps
+      ) {
+        acc.push(day.date);
+      }
+      return acc;
+    }, []);
+    return daysTrend;
+  }
+
+  // * Our Own Trend
+  compareMilesWalkedToHike(idNumber, user) {
+    let userData = this.getUserActivityData(idNumber);
+    let totalStepsTaken = userData.reduce((acc, active) => {
+      acc += active.numSteps;
+      return acc;
+    }, 0);
+    console.log(totalStepsTaken);
+    let totalMilesWalked = Number(
+      (totalStepsTaken * user.strideLength) / 5280
+    ).toFixed(1);
+    let mountRainierSummitHike = 14.7;
+    let timesYouHiked = Number(
+      totalMilesWalked / mountRainierSummitHike
+    ).toFixed(1);
+
+    return `Your ${totalMilesWalked} lifetime miles is equivalent to ${timesYouHiked} times you have done Mount Rainier Standard Summit Hike`;
+  }
 }
 
 if (typeof module !== 'undefined') {
