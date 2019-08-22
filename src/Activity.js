@@ -3,10 +3,6 @@ class Activity {
     this.userData = activityData;
   }
 
-  // getUserActivityData(idNumber) {
-  //   return this.data.filter(active => active.userID === idNumber);
-  // }
-
   calculateMilesWalked(date, user) {
     let stepsTaken = this.userData.find(
       active => active.date === date && active.userID === user.id
