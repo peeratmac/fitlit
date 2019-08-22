@@ -45,19 +45,37 @@ describe('ACTIVITY', () => {
   });
 
   it('should calculate the all user average steps, active minutes and flights of stairs climbed for a given day', () => {
-    expect(activity.getAllUserAverage('2019/06/20', 'numSteps')).to.equal(
-      8711.6
-    );
+    expect(activity.getAllUserAverage('2019/06/20', 'numSteps')).to.equal(8711);
     expect(activity.getAllUserAverage('2019/06/20', 'minutesActive')).to.equal(
-      180.6
+      180
     );
     expect(
       activity.getAllUserAverage('2019/06/20', 'flightsOfStairs')
-    ).to.equal(25.5);
+    ).to.equal(25);
   });
 
   it('should calculate how often a user achieve their step goal in percentage', () => {
     expect(activity.calculateStepGoalAchievement(user2)).to.equal(50);
+  });
+
+  it('should return any activities for a user for any date', () => {
+    expect(
+      activity.returnCurrentActivityDatum('2019/06/20', user1ID, 'numSteps')
+    ).to.equal(14478);
+    expect(
+      activity.returnCurrentActivityDatum(
+        '2019/06/20',
+        user2ID,
+        'minutesActive'
+      )
+    ).to.equal(74);
+    expect(
+      activity.returnCurrentActivityDatum(
+        '2019/06/21',
+        user2ID,
+        'flightsOfStairs'
+      )
+    ).to.equal(26);
   });
 
   it('should give out friends steps', () => {

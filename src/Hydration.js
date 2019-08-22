@@ -4,22 +4,20 @@ class Hydration {
   }
 
   getDailyWaterIntake(date) {
-    let dailyOunces = this.data.find(user => user.date === date).numOunces;
-    return dailyOunces;
+    return this.data.find(user => user.date === date).numOunces;
   }
 
   getWeeklyWaterIntake() {
-    let weekly = this.data.slice(this.data.length - 7, this.data.length + 1);
-    let weeklyWaterIntake = weekly.map(day => day.numOunces);
-    return weeklyWaterIntake;
+    return this.data
+      .slice(this.data.length - 7, this.data.length + 1)
+      .map(day => day.numOunces);
   }
 
   getAverageWaterConsumption() {
-    let totalWaterConsume = this.data.reduce(
-      (acc, day) => (acc += day.numOunces),
-      0
+    return parseInt(
+      this.data.reduce((acc, day) => (acc += day.numOunces), 0) /
+        this.data.length
     );
-    return parseInt(totalWaterConsume / this.data.length);
   }
 }
 

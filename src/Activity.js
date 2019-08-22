@@ -104,9 +104,6 @@ class Activity {
       if (index < 2) {
         return acc;
       }
-      console.log(day.numSteps);
-      console.log(userData[index - 1].numSteps);
-      console.log(userData[index - 2].numSteps);
       if (
         day.numSteps > userData[index - 1].numSteps &&
         userData[index - 1].numSteps > userData[index - 2].numSteps
@@ -125,7 +122,6 @@ class Activity {
       acc += active.numSteps;
       return acc;
     }, 0);
-    console.log(totalStepsTaken);
     let totalMilesWalked = Number(
       (totalStepsTaken * user.strideLength) / 5280
     ).toFixed(1);
