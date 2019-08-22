@@ -65,7 +65,7 @@ class Activity {
     let allUserDateData = this.data.filter(active => active.date === date);
     return parseInt(
       allUserDateData.reduce((acc, active) => acc + active[property], 0) /
-      allUserDateData.length
+        allUserDateData.length
     );
   }
 
@@ -78,8 +78,9 @@ class Activity {
   }
 
   returnCurrentActivityDatum(date, idNumber, activity) {
-    return this.data.filter(active => active.userID === idNumber)
-    .find(e => e.date === date)[activity]
+    return this.data
+      .filter(active => active.userID === idNumber)
+      .find(e => e.date === date)[activity];
   }
   // * Iteration 5 (this is giving you the total steps for the last 7 days)
   getWeeklySteps(date, idNumber) {
@@ -135,6 +136,7 @@ class Activity {
 
     return `Your ${totalMilesWalked} lifetime miles is equivalent to ${timesYouHiked} times you have done Mount Rainier Standard Summit Hike`;
   }
+}
 
 if (typeof module !== 'undefined') {
   module.exports = Activity;
