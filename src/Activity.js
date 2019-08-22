@@ -17,19 +17,19 @@ class Activity {
     return minutesActive;
   }
 
-  getWeekAverageActivity(date) {
+  getWeekAverageActivity(date, property) {
     let lastDay;
     this.userData.forEach((activity, index) =>
       activity.date === date ? (lastDay = index) : null
     );
     let weekly = this.userData.slice(lastDay - 6, lastDay + 1);
-    let weeklyActivityMinutes =
+    let weeklyActivity =
       weekly.reduce((acc, active) => {
-        acc += active.minutesActive;
+        acc += active[property];
         return acc;
       }, 0) / 7;
 
-    return Number(weeklyActivityMinutes.toFixed(1));
+    return Number(weeklyActivity.toFixed(1));
   }
 
   checkStepGoal(date, user) {
@@ -106,7 +106,7 @@ class Activity {
       totalMilesWalked / mountRainierSummitHike
     ).toFixed(1);
 
-    return `Your ${totalMilesWalked} lifetime miles is equivalent to ${timesYouHiked} times you have done Mount Rainier Standard Summit Hike`;
+    return `Your ${totalMilesWalked} lifetime miles is equivalent to ${timesYouHiked} times you have completed the Mount Rainier Standard Summit Hike`;
   }
 }
 

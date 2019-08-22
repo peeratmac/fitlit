@@ -14,6 +14,17 @@ class ActivityRepository {
         allUserDateData.length
     );
   }
+
+  getFriendsListStepCount(friendsList, date) {
+    return this.data
+      .filter(e => e.date === date)
+      .reduce((acc, friend) => {
+        if (friendsList.includes(friend.userID)) {
+          acc.push({ steps: friend.numSteps, id: friend.userID });
+        }
+        return acc;
+      }, []);
+  }
 }
 
 if (typeof module !== 'undefined') {

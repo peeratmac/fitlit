@@ -11,6 +11,15 @@ class UserRepository {
     let stepTotal = this.data.reduce((acc, x) => acc + x.dailyStepGoal, 0);
     return stepTotal / this.data.length;
   }
+
+  getFriends(array) {
+    return this.data.reduce((acc, friend) => {
+      if (array.includes(friend.id)) {
+        acc.push({ name: friend.name, id: friend.id });
+      }
+      return acc;
+    }, []);
+  }
 }
 
 // module.exports = UserRepository;

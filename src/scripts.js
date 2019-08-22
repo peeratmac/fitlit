@@ -1,34 +1,34 @@
 let date = new Date();
 const dd = String(date.getDate()).padStart(2, '0');
-const mm = String(date.getMonth() + 1).padStart(2, '0'); 
+const mm = String(date.getMonth() + 1).padStart(2, '0');
 const yyyy = date.getFullYear();
-date =  yyyy + '/' + mm + '/' + dd;
+date = yyyy + '/' + mm + '/' + dd;
 
-
-// All DOM manipulation
-$(document).ready(function () {
+$(document).ready(function() {
   const userRepo = new UserRepository(userData);
   let userID = Math.ceil(Math.random() * userRepo.data.length);
-
-  // ! replace hard-coded dates with real data once that part is ready
-  // ! date should mostly be today's date (to get the past week / 7 days data)
   const todayDate = date;
-  const user = userRepo.getUserByID(userID);
-  const currentUser = new User(user);
+  const currentUser = new User(userRepo.getUserByID(userID));
   const dailyStepGoal = currentUser.dailyStepGoal;
   const globalStepAverage = userRepo.averageUserStepGoal();
-  const percentGlobalSteps = parseInt((dailyStepGoal / globalStepAverage) * 100);
+  const percentGlobalSteps = parseInt(
+    (dailyStepGoal / globalStepAverage) * 100
+  );
   const hydrationRepo = new HydrationRepository(hydrationData);
-  const userDataHydrations = hydrationRepo.getUserHydrationByID(userID);
-  const hydrationUser = new Hydration(userDataHydrations);
+  const hydrationUser = new Hydration(
+    hydrationRepo.getUserHydrationByID(userID)
+  );
   const dailyWaterIntake = hydrationUser.getDailyWaterIntake(todayDate);
   const weeklyWaterIntake = hydrationUser.getWeeklyWaterIntake();
   const sleepUser = new Sleep(sleepData);
-  const activity = new Activity(activityData)
+  const activityRepo = new ActivityRepository(activityData);
+  const activity = new Activity(activityRepo.getUserActivityData(userID));
   const lastNightSleep = sleepUser.getHoursSleptByDate(todayDate, userID);
   const weeklySleepArray = sleepUser.getWeeklySleeps(todayDate, userID);
-  const weeklySleepQualityArray = sleepUser.getWeeklyQualities(todayDate, userID);
-
+  const weeklySleepQualityArray = sleepUser.getWeeklyQualities(
+    todayDate,
+    userID
+  );
 
   $('.user-name').text(currentUser.name);
   $('.user-first-name').text(currentUser.getFirstName());
@@ -47,21 +47,60 @@ $(document).ready(function () {
   $('.jq-week-quality').text(weeklySleepQualityArray.join(' points, '));
   $('.jq-all-time-sleep-average').text(sleepUser.averageDailySleep(userID));
   $('.jq-all-time-quality-average').text(sleepUser.averageSleepQuality(userID));
-  $('.jq-percent-achieve').text(activity.calculateStepGoalAchievement(user)+ '%');
-  $('.current-steps').text(activity.returnCurrentActivityDatum(todayDate, userID, 'numSteps'));
-  $('.active-minutes').text(activity.returnCurrentActivityDatum(todayDate, userID, 'minutesActive'));
-  $('.current-flight-of-stairs').text(activity.returnCurrentActivityDatum(todayDate, userID, 'flightsOfStairs'));
-  $('.miles-walked').text(activity.calculateMilesWalked(todayDate, user));
-  $('.weekly-minutes-active').text(activity.getWeekAverageActivity(todayDate, userID));
-  // $('.weekly-steps').text(activity.getWeekAverageSteps(todayDate, userID))
-  // $().text()
-  // $().text()
-  $('.all-average-steps').text(activity.getAllUserAverage(todayDate, 'numSteps'))
-  $('.all-average-minutes').text(activity.getAllUserAverage(todayDate, 'minutesActive'))
-  $('.all-average-stairs').text(activity.getAllUserAverage(todayDate, 'flightsOfStairs'))
-  
-  $('.date').text(date)
+  $('.jq-percent-achieve').text(
+    activity.calculateStepGoalAchievement(currentUser) + '%'
+  );
+  $('.current-steps').text(
+    activity.returnCurrentActivityDatum(todayDate, 'numSteps')
+  );
+  $('.active-minutes').text(
+    activity.returnCurrentActivityDatum(todayDate, 'minutesActive')
+  );
+  $('.current-flight-of-stairs').text(
+    activity.returnCurrentActivityDatum(todayDate, 'flightsOfStairs')
+  );
 
+  $('.miles-walked').text(
+    activity.calculateMilesWalked(todayDate, currentUser)
+  );
 
-})
+  $('.weekly-minutes-active').text(
+    activity.getWeekAverageActivity(todayDate, 'minutesActive')
+  );
 
+  $('.weekly-steps').text(
+    activity.getWeekAverageActivity(todayDate, 'numSteps')
+  );
+
+  $('.weekly-stairs').text(
+    activity.getWeekAverageActivity(todayDate, 'flightsOfStairs')
+  );
+
+  $('.all-average-steps').text(
+    activityRepo.getAllUserAverage(todayDate, 'numSteps')
+  );
+  $('.all-average-minutes').text(
+    activityRepo.getAllUserAverage(todayDate, 'minutesActive')
+  );
+  $('.all-average-stairs').text(
+    activityRepo.getAllUserAverage(todayDate, 'flightsOfStairs')
+  );
+  $('.mountain').text(activity.compareMilesWalkedToHike(currentUser));
+
+  activity.getDaysWithStepsTrend().forEach(day => {
+    $('.day-streaks').append(`<li>${day}</li>`);
+  });
+
+  activityRepo
+    .getFriendsListStepCount(currentUser.friends, todayDate)
+    .sort((a, b) => b.steps - a.steps)
+    .forEach(friend => {
+      $('.friend-list').append(
+        `<li class="jq-user${friend.id}"> ${friend.steps}</li>`
+      );
+    });
+
+  userRepo.getFriends(currentUser.friends).forEach(friend => {
+    $(`.jq-user${friend.id}`).prepend(`${friend.name} steps: `);
+  });
+});

@@ -35,6 +35,14 @@ describe('ACTIVITY REPOSITORY', () => {
       activityRepo.getAllUserAverage('2019/06/20', 'flightsOfStairs')
     ).to.equal(25);
   });
+  it.only('should be able to return friends step count on user friends list', () => {
+    expect(activityRepo.getFriendsListStepCount([3], '2019/06/20')).to.eql([
+      {
+        steps: 5369,
+        id: 3
+      }
+    ]);
+  });
 });
 
 describe('ACTIVITY', () => {
@@ -47,9 +55,9 @@ describe('ACTIVITY', () => {
   });
 
   it('should calculate how many minutes active did they average for a given week', () => {
-    expect(activity1.getWeekAverageActivity('2019/06/21', user1ID)).to.equal(
-      171.1
-    );
+    expect(
+      activity1.getWeekAverageActivity('2019/06/21', 'minutesActive')
+    ).to.equal(171.1);
   });
 
   it('should check if a user reached their step goal on a given day', () => {
@@ -92,7 +100,7 @@ describe('ACTIVITY', () => {
 
   it('should return lifetime miles and calculate how many times the hikes were completed based on lifetime miles', () => {
     expect(activity1.compareMilesWalkedToHike(user1)).to.equal(
-      'Your 56.1 lifetime miles is equivalent to 3.8 times you have done Mount Rainier Standard Summit Hike'
+      'Your 56.1 lifetime miles is equivalent to 3.8 times you have completed the Mount Rainier Standard Summit Hike'
     );
   });
 });
