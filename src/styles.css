@@ -9,6 +9,7 @@
 body {
   background-color: lightgray;
 }
+
 header{
   display: flex;
   justify-content: space-between;
@@ -35,6 +36,10 @@ header img {
   
 }
 
+ul{
+  list-style-type: none;
+}
+
 main {
   padding: 10px;
   width: 100%;
@@ -54,8 +59,16 @@ section {
   width: 95%;
 }
 
+section div {
+  text-align: center;
+}
+
 h2{
   border-bottom: 2px solid gray;
+}
+
+h3 {
+  margin-top: 10px;
 }
 .user-info {
   grid-area: user;
