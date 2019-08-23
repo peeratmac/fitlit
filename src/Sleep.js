@@ -1,15 +1,11 @@
 class Sleep {
-  constructor(sleepData) {
-    this.data = sleepData;
-  }
-  getUserSleepData(idNumber) {
-    return this.data.filter(night => night.userID === idNumber);
+  constructor(userSleepData) {
+    this.userData = userSleepData;
   }
 
-  averageDailySleep(idNumber) {
-    let userSleepData = this.getUserSleepData(idNumber);
-    let nightCount = userSleepData.length;
-    let totalHoursSlept = userSleepData.reduce((acc, night) => {
+  averageDailySleep() {
+    let nightCount = this.userData.length;
+    let totalHoursSlept = this.userData.reduce((acc, night) => {
       acc += night.hoursSlept;
       return acc;
     }, 0);
@@ -17,10 +13,9 @@ class Sleep {
     return Number((totalHoursSlept / nightCount).toFixed(1));
   }
 
-  averageSleepQuality(idNumber) {
-    let userSleepData = this.getUserSleepData(idNumber);
-    let nightCount = userSleepData.length;
-    let totalSleepQuality = userSleepData.reduce((acc, night) => {
+  averageSleepQuality() {
+    let nightCount = this.userData.length;
+    let totalSleepQuality = this.userData.reduce((acc, night) => {
       acc += night.sleepQuality;
       return acc;
     }, 0);
@@ -28,91 +23,55 @@ class Sleep {
     return Number((totalSleepQuality / nightCount).toFixed(1));
   }
 
-  getHoursSleptByDate(date, idNumber) {
-    let userSleepData = this.getUserSleepData(idNumber);
-    let hoursSlept = userSleepData.find(night => night.date === date)
+  getHoursSleptByDate(date) {
+    let hoursSlept = this.userData.find(night => night.date === date)
       .hoursSlept;
 
     return hoursSlept;
   }
 
-  getQualityByDate(date, idNumber) {
-    let userSleepData = this.getUserSleepData(idNumber);
-    let nightQuality = userSleepData.find(night => night.date === date)
+  getQualityByDate(date) {
+    let nightQuality = this.userData.find(night => night.date === date)
       .sleepQuality;
 
     return nightQuality;
   }
 
-  getWeeklySleeps(date, idNumber) {
-    let userSleepData = this.getUserSleepData(idNumber);
+  getWeeklySleeps(date) {
     let lastDay;
-    userSleepData.forEach((night, index) =>
+    this.userData.forEach((night, index) =>
       night.date === date ? (lastDay = index) : null
     );
-    let weekly = userSleepData.slice(lastDay - 6, lastDay + 1);
-    let weeklyHoursSlept = weekly.map(night => night.hoursSlept);
+    let weekly = this.userData.slice(lastDay - 6, lastDay + 1);
+    let weeklyHoursSlept = weekly.map(night => ({
+      date: night.date,
+      hours: night.hoursSlept
+    }));
 
     return weeklyHoursSlept;
   }
 
-  getWeeklyQualities(date, idNumber) {
-    let userSleepData = this.getUserSleepData(idNumber);
+  getWeeklyQualities(date) {
     let lastDay;
-    userSleepData.forEach((night, index) =>
+    this.userData.forEach((night, index) =>
       night.date === date ? (lastDay = index) : null
     );
-    let weekly = userSleepData.slice(lastDay - 6, lastDay + 1);
-    let weeklyQualities = weekly.map(night => night.sleepQuality);
 
-    return weeklyQualities;
+    return this.userData
+      .slice(lastDay - 6, lastDay + 1)
+      .map(night => ({ date: night.date, quality: night.sleepQuality }));
   }
 
-  getGroupAverageQuality() {
-    let totalQuality = this.data.reduce((acc, sleep) => {
-      acc += sleep.sleepQuality;
-      return acc;
-    }, 0);
-    return Number((totalQuality / this.data.length).toFixed(1));
-  }
-
-  getGoodSleepers(date) {
-    let goodSleepers = [];
-    // console.log(this.data)
-    let idList = this.data
-      .map(sleep => sleep.userID)
-      .reduce((acc, idNumber) => {
-        if (!acc.includes(idNumber)) acc.push(idNumber);
-        return acc;
-      }, []);
-    idList.forEach(id => {
-      if (this.getWeeklyQualities(date, id).reduce((a, b) => a + b, 0) / 7 > 3)
-        goodSleepers.push(id);
-    });
-
-    return goodSleepers;
-  }
-
-  getTopSleeper(date) {
-    let dateData = this.data.filter(sleep => sleep.date === date);
-    dateData.sort((sleepA, sleepB) => sleepB.hoursSlept - sleepA.hoursSlept);
-
-    return dateData[0].hoursSlept > dateData[1].hoursSlept
-      ? [dateData[0].userID]
-      : [dateData[0].userID, dateData[1].userID];
-  }
-
-  calculateSleepScore(date, idNumber) {
-    let userSleepData = this.getUserSleepData(idNumber);
-    let selectedNightSleep = userSleepData.find(night => night.date === date);
+  calculateSleepScore(date) {
+    let selectedNightSleep = this.userData.find(night => night.date === date);
     let sleepScore =
       selectedNightSleep.hoursSlept * selectedNightSleep.sleepQuality;
     return sleepScore;
   }
 
-  getWeeklySleepScores(date, idNumber) {
-    let weeklySleeps = this.getWeeklySleeps(date, idNumber);
-    let weeklyQualities = this.getWeeklyQualities(date, idNumber);
+  getWeeklySleepScores(date) {
+    let weeklySleeps = this.getWeeklySleeps(date);
+    let weeklyQualities = this.getWeeklyQualities(date);
 
     return weeklySleeps.map((hour, index) => {
       return Number((hour * weeklyQualities[index]).toFixed(2));
