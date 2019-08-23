@@ -50,15 +50,131 @@ describe('SLEEP', () => {
   });
 
   it('should return the daily hours slept for a given week', () => {
-    let hours = [4.1, 8, 10.4, 10.7, 9.3, 7.8, 7];
-    let hours2 = [6.1, 4.1, 8, 10.4, 10.7, 9.3, 7.8];
-    expect(sleeper1.getWeeklySleeps('2019/06/22')).to.eql(hours);
+    let hours1 = [
+      {
+        date: '2019/06/16',
+        hours: 4.1
+      },
+      {
+        date: '2019/06/17',
+        hours: 8
+      },
+      {
+        date: '2019/06/18',
+        hours: 10.4
+      },
+      {
+        date: '2019/06/19',
+        hours: 10.7
+      },
+      {
+        date: '2019/06/20',
+        hours: 9.3
+      },
+      {
+        date: '2019/06/21',
+        hours: 7.8
+      },
+      {
+        date: '2019/06/22',
+        hours: 7
+      }
+    ];
+    let hours2 = [
+      {
+        date: '2019/06/15',
+        hours: 6.1
+      },
+      {
+        date: '2019/06/16',
+        hours: 4.1
+      },
+      {
+        date: '2019/06/17',
+        hours: 8
+      },
+      {
+        date: '2019/06/18',
+        hours: 10.4
+      },
+      {
+        date: '2019/06/19',
+        hours: 10.7
+      },
+      {
+        date: '2019/06/20',
+        hours: 9.3
+      },
+      {
+        date: '2019/06/21',
+        hours: 7.8
+      }
+    ];
+    expect(sleeper1.getWeeklySleeps('2019/06/22')).to.eql(hours1);
     expect(sleeper1.getWeeklySleeps('2019/06/21')).to.eql(hours2);
   });
 
   it('should return the nightly sleep quality for a given week', () => {
-    let qualities1 = [3.8, 2.6, 3.1, 1.2, 1.2, 4.2, 3];
-    let qualities2 = [2.2, 3.8, 2.6, 3.1, 1.2, 1.2, 4.2];
+    let qualities1 = [
+      {
+        date: '2019/06/16',
+        quality: 3.8
+      },
+      {
+        date: '2019/06/17',
+        quality: 2.6
+      },
+      {
+        date: '2019/06/18',
+        quality: 3.1
+      },
+      {
+        date: '2019/06/19',
+        quality: 1.2
+      },
+      {
+        date: '2019/06/20',
+        quality: 1.2
+      },
+      {
+        date: '2019/06/21',
+        quality: 4.2
+      },
+      {
+        date: '2019/06/22',
+        quality: 3
+      }
+    ];
+    let qualities2 = [
+      {
+        date: '2019/06/15',
+        quality: 2.2
+      },
+      {
+        date: '2019/06/16',
+        quality: 3.8
+      },
+      {
+        date: '2019/06/17',
+        quality: 2.6
+      },
+      {
+        date: '2019/06/18',
+        quality: 3.1
+      },
+      {
+        date: '2019/06/19',
+        quality: 1.2
+      },
+      {
+        date: '2019/06/20',
+        quality: 1.2
+      },
+      {
+        date: '2019/06/21',
+        quality: 4.2
+      }
+    ];
     expect(sleeper1.getWeeklyQualities('2019/06/22')).to.eql(qualities1);
     expect(sleeper1.getWeeklyQualities('2019/06/21')).to.eql(qualities2);
   });
