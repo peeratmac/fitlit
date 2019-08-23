@@ -35,7 +35,7 @@ describe('ACTIVITY REPOSITORY', () => {
       activityRepo.getAllUserAverage('2019/06/20', 'flightsOfStairs')
     ).to.equal(25);
   });
-  it.only('should be able to return friends step count on user friends list', () => {
+  it('should be able to return friends step count on user friends list', () => {
     expect(activityRepo.getFriendsListStepCount([3], '2019/06/20')).to.eql([
       {
         steps: 5369,

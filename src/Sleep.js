@@ -43,7 +43,10 @@ class Sleep {
       night.date === date ? (lastDay = index) : null
     );
     let weekly = this.userData.slice(lastDay - 6, lastDay + 1);
-    let weeklyHoursSlept = weekly.map(night => night.hoursSlept);
+    let weeklyHoursSlept = weekly.map(night => ({
+      date: night.date,
+      hours: night.hoursSlept
+    }));
 
     return weeklyHoursSlept;
   }
@@ -56,7 +59,7 @@ class Sleep {
 
     return this.userData
       .slice(lastDay - 6, lastDay + 1)
-      .map(night => night.sleepQuality);
+      .map(night => ({ date: night.date, quality: night.sleepQuality }));
   }
 
   calculateSleepScore(date) {

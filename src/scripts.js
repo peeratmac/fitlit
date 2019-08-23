@@ -1,28 +1,26 @@
-let date = new Date();
-const dd = String(date.getDate()).padStart(2, '0');
-const mm = String(date.getMonth() + 1).padStart(2, '0');
-const yyyy = date.getFullYear();
-date = yyyy + '/' + mm + '/' + dd;
+const todayDate = `${new Date().getFullYear()}/${String(
+  new Date().getMonth() + 1
+).padStart(2, '0')}/${String(new Date().getDate()).padStart(2, '0')}`;
 
 $(document).ready(function() {
   const userRepo = new UserRepository(userData);
   let userID = Math.ceil(Math.random() * userRepo.data.length);
-  const todayDate = date;
   const currentUser = new User(userRepo.getUserByID(userID));
+  const hydrationRepo = new HydrationRepository(hydrationData);
+  const hydrationUser = new Hydration(
+    hydrationRepo.getUserHydrationByID(userID)
+  );
+  const activityRepo = new ActivityRepository(activityData);
+  const activity = new Activity(activityRepo.getUserActivityData(userID));
+  const sleepRepo = new SleepRepository(sleepData);
+  const sleepUser = new Sleep(sleepRepo.getUserSleepData(userID));
   const dailyStepGoal = currentUser.dailyStepGoal;
   const globalStepAverage = userRepo.averageUserStepGoal();
   const percentGlobalSteps = parseInt(
     (dailyStepGoal / globalStepAverage) * 100
   );
-  const hydrationRepo = new HydrationRepository(hydrationData);
-  const hydrationUser = new Hydration(
-    hydrationRepo.getUserHydrationByID(userID)
-  );
   const dailyWaterIntake = hydrationUser.getDailyWaterIntake(todayDate);
   const weeklyWaterIntake = hydrationUser.getWeeklyWaterIntake();
-  const sleepUser = new Sleep(sleepData);
-  const activityRepo = new ActivityRepository(activityData);
-  const activity = new Activity(activityRepo.getUserActivityData(userID));
   const lastNightSleep = sleepUser.getHoursSleptByDate(todayDate, userID);
   const weeklySleepArray = sleepUser.getWeeklySleeps(todayDate, userID);
   const weeklySleepQualityArray = sleepUser.getWeeklyQualities(
@@ -41,10 +39,9 @@ $(document).ready(function() {
   $('.email').text(currentUser.email);
   $('.stride').text(currentUser.strideLength);
   $('.water').text(dailyWaterIntake);
-  $('.water-history').text(weeklyWaterIntake.join('oz, ') + 'oz');
+
   $('.user-sleep').text(lastNightSleep);
-  $('.user-sleep-average').text(`${weeklySleepArray.join(' hours, ')}`);
-  $('.jq-week-quality').text(weeklySleepQualityArray.join(' points, '));
+
   $('.jq-all-time-sleep-average').text(sleepUser.averageDailySleep(userID));
   $('.jq-all-time-quality-average').text(sleepUser.averageSleepQuality(userID));
   $('.jq-percent-achieve').text(
@@ -102,5 +99,23 @@ $(document).ready(function() {
 
   userRepo.getFriends(currentUser.friends).forEach(friend => {
     $(`.jq-user${friend.id}`).prepend(`${friend.name} steps: `);
+  });
+
+  hydrationUser.getWeeklyWaterIntake().forEach(day => {
+    $('.water-history').append(`<p>${day.date} you drank ${day.ounces}oz.</p>`);
+  });
+
+  sleepUser.getWeeklySleeps(todayDate).forEach(night => {
+    $('.user-sleep-average').append(
+      `<p>On ${night.date} you slept for ${night.hours} hours.</p>`
+    );
+  });
+
+  sleepUser.getWeeklyQualities(todayDate).forEach(night => {
+    $('.jq-week-quality').append(
+      `<p>On ${night.date} your sleep quality was rated at ${
+        night.quality
+      }.</p>`
+    );
   });
 });

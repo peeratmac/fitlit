@@ -9,8 +9,8 @@ class Hydration {
 
   getWeeklyWaterIntake() {
     return this.data
-      .slice(this.data.length - 7, this.data.length + 1)
-      .map(day => day.numOunces);
+      .slice(this.data.length - 6, this.data.length)
+      .map(day => ({ ounces: day.numOunces, date: day.date }));
   }
 
   getAverageWaterConsumption() {
