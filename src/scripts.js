@@ -105,12 +105,11 @@ $(document).ready(function() {
     $('.water-history').append(`<p>${day.date} you drank ${day.ounces}oz.</p>`);
   });
 
-  // ! testing chart.js
-  // let getSleepHoursLastWeek = sleepUser.getWeeklySleeps(todayDate).forEach(night => {
-  //   $('.user-sleep-average').append(
-  //     `<p>On ${night.date} you slept for ${night.hours} hours.</p>`
-  //   );
-  // });
+  sleepUser.getWeeklySleeps(todayDate).forEach(night => {
+    $('.user-sleep-average').append(
+      `<p>On ${night.date} you slept for ${night.hours} hours.</p>`
+    );
+  });
 
   sleepUser.getWeeklyQualities(todayDate).forEach(night => {
     $('.jq-week-quality').append(
@@ -120,22 +119,13 @@ $(document).ready(function() {
     );
   });
 
-  let getSleepHoursLastWeek = sleepUser
-    .getWeeklySleeps(todayDate)
-    .forEach(night => {
-      $('.user-sleep-average').append(
-        `<p>On ${night.date} you slept for ${night.hours} hours.</p>`
-      );
-    });
-
   // ! testing chart.js
-  // xLastWeekSleepHoursChart.update();
   let lastWeekSleepHoursChart = $('#TEST-CHART-SLEEP-1');
   let xLastWeekSleepHoursChart = new Chart(lastWeekSleepHoursChart, {
     type: 'bar',
 
     data: {
-      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Today'],
       datasets: [
         {
           label: 'Sleep Hours',
@@ -148,7 +138,7 @@ $(document).ready(function() {
             'violet',
             'teal'
           ],
-          data: getSleepHoursLastWeek
+          data: [5, 7, 9]
         }
       ]
     },
@@ -156,6 +146,48 @@ $(document).ready(function() {
       title: {
         display: true,
         text: 'Weekly Sleep Hours'
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+  let weeklySleepScores = sleepUser.getWeeklySleepScores(todayDate);
+
+  let lastWeekSleepScoresChart = $('#TEST-CHART-SLEEP-2');
+  let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
+    type: 'bar',
+    data: {
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Today'],
+      datasets: [
+        {
+          label: 'Sleep Scores',
+          backgroundColor: [
+            'red',
+            'blue',
+            'pink',
+            'green',
+            'yellow',
+            'violet',
+            'teal'
+          ],
+          data: weeklySleepScores
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Weekly Sleep Scores'
       },
       scales: {
         yAxes: [
