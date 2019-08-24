@@ -105,11 +105,12 @@ $(document).ready(function() {
     $('.water-history').append(`<p>${day.date} you drank ${day.ounces}oz.</p>`);
   });
 
-  sleepUser.getWeeklySleeps(todayDate).forEach(night => {
-    $('.user-sleep-average').append(
-      `<p>On ${night.date} you slept for ${night.hours} hours.</p>`
-    );
-  });
+  // ! testing chart.js
+  // let getSleepHoursLastWeek = sleepUser.getWeeklySleeps(todayDate).forEach(night => {
+  //   $('.user-sleep-average').append(
+  //     `<p>On ${night.date} you slept for ${night.hours} hours.</p>`
+  //   );
+  // });
 
   sleepUser.getWeeklyQualities(todayDate).forEach(night => {
     $('.jq-week-quality').append(
@@ -117,5 +118,56 @@ $(document).ready(function() {
         night.quality
       }.</p>`
     );
+  });
+
+  let getSleepHoursLastWeek = sleepUser
+    .getWeeklySleeps(todayDate)
+    .forEach(night => {
+      $('.user-sleep-average').append(
+        `<p>On ${night.date} you slept for ${night.hours} hours.</p>`
+      );
+    });
+
+  // ! testing chart.js
+  // xLastWeekSleepHoursChart.update();
+  let lastWeekSleepHoursChart = $('#TEST-CHART-SLEEP-1');
+  let xLastWeekSleepHoursChart = new Chart(lastWeekSleepHoursChart, {
+    type: 'bar',
+
+    data: {
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+      datasets: [
+        {
+          label: 'Sleep Hours',
+          backgroundColor: [
+            'red',
+            'blue',
+            'pink',
+            'green',
+            'yellow',
+            'violet',
+            'teal'
+          ],
+          data: getSleepHoursLastWeek
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Weekly Sleep Hours'
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
+      responsive: true,
+      maintainAspectRatio: false
+    }
   });
 });
