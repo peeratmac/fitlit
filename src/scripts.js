@@ -120,32 +120,42 @@ $(document).ready(function() {
   });
 
   // ! testing chart.js
+  Chart.defaults.global.defaultFontFamily = 'Livvic';
+  // * for mapping sleep hours in a correct format
+  const getWeeklySleepsArray = date => {
+    return sleepUser.getWeeklySleeps(date).map(night => night.hours);
+  };
+
   let lastWeekSleepHoursChart = $('#TEST-CHART-SLEEP-1');
   let xLastWeekSleepHoursChart = new Chart(lastWeekSleepHoursChart, {
     type: 'bar',
 
     data: {
-      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Today'],
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', todayDate],
       datasets: [
         {
           label: 'Sleep Hours',
           backgroundColor: [
-            'red',
-            'blue',
-            'pink',
-            'green',
-            'yellow',
-            'violet',
-            'teal'
+            '#45aaf2',
+            '#4b7bec',
+            '#a55eea',
+            '#26de81',
+            '#2bcbba',
+            '#fed330',
+            '#fd9644'
           ],
-          data: [5, 7, 9]
+          data: getWeeklySleepsArray(todayDate),
+          borderWidth: 1,
+          borderColor: '#777',
+          hoverBorderWidth: 3,
+          hoverBorderColor: '#000'
         }
       ]
     },
     options: {
       title: {
         display: true,
-        text: 'Weekly Sleep Hours'
+        text: 'Weekly Sleep (Hours)'
       },
       scales: {
         yAxes: [
@@ -167,27 +177,73 @@ $(document).ready(function() {
   let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
     type: 'bar',
     data: {
-      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Today'],
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', todayDate],
       datasets: [
         {
           label: 'Sleep Scores',
           backgroundColor: [
-            'red',
-            'blue',
-            'pink',
-            'green',
-            'yellow',
-            'violet',
-            'teal'
+            '#45aaf2',
+            '#4b7bec',
+            '#a55eea',
+            '#26de81',
+            '#2bcbba',
+            '#fed330',
+            '#fd9644'
           ],
-          data: weeklySleepScores
+          data: weeklySleepScores,
+          borderWidth: 1,
+          borderColor: '#777',
+          hoverBorderWidth: 3,
+          hoverBorderColor: '#000'
         }
       ]
     },
     options: {
       title: {
         display: true,
-        text: 'Weekly Sleep Scores'
+        text: 'Weekly Sleep Scores (Points)'
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+  // ******** Water Chart **********
+  let lastWeekWaterChart = $('#TEST-CHART-WATER-1');
+  let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
+    type: 'line',
+    data: {
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', todayDate],
+      datasets: [
+        {
+          label: 'Water Consumed (Ounces)',
+          backgroundColor: [
+            '#45aaf2',
+            '#4b7bec',
+            '#a55eea',
+            '#26de81',
+            '#2bcbba',
+            '#fed330',
+            '#fd9644'
+          ],
+          data: hydrationUser.getWeeklyWaterIntake().map(day => day.ounces),
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Weekly Water (Ounces)'
       },
       scales: {
         yAxes: [
