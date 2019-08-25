@@ -113,3 +113,7 @@ container {
   text-align: center;
   width: 48%;
 }
+
+#mountain-pic {
+  width: 200px;
+}
