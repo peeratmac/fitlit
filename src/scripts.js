@@ -117,6 +117,18 @@ $(document).ready(function() {
     );
   });
 
+  currentUser.friends
+    .map(id => ({
+      id: id,
+      weeklySteps: activityRepo.weeklyStepTotal(id, todayDate)
+    }))
+    .sort((a, b) => b.weeklySteps - a.weeklySteps)
+    .forEach(friend => {
+      $('.jq-friend-week-steps').append(
+        `<li>${friend.weeklySteps} AND ID ${friend.id}</li>`
+      );
+    });
+
   // ! testing chart.js
   Chart.defaults.global.defaultFontFamily = 'Livvic';
   // * for mapping sleep hours in a correct format
