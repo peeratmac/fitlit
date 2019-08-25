@@ -86,8 +86,10 @@ describe('HYDRATION', () => {
       }
     ];
 
-    expect(hydrationUser.getWeeklyWaterIntake().length).to.equal(7);
-    expect(hydrationUser.getWeeklyWaterIntake()).to.eql(weeklyWaterUser7);
+    expect(hydrationUser.getWeeklyWaterIntake('2019/06/22').length).to.equal(7);
+    expect(hydrationUser.getWeeklyWaterIntake('2019/06/22')).to.eql(
+      weeklyWaterUser7
+    );
   });
 
   it('should calculate the average fluid consumed per day for all time', () => {

@@ -25,6 +25,19 @@ class ActivityRepository {
         return acc;
       }, []);
   }
+
+  weeklyStepTotal(idNumber, date) {
+    let userData = this.getUserActivityData(idNumber);
+    let lastDay;
+    userData.forEach((day, index) =>
+      day.date === date ? (lastDay = index) : null
+    );
+    let weeklyTotal = userData
+      .slice(lastDay - 6, lastDay + 1)
+      .reduce((stepTotal, day) => (stepTotal += day.numSteps), 0);
+
+    return weeklyTotal;
+  }
 }
 
 if (typeof module !== 'undefined') {
