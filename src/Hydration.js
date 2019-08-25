@@ -7,9 +7,16 @@ class Hydration {
     return this.data.find(user => user.date === date).numOunces;
   }
 
-  getWeeklyWaterIntake() {
+  getWeeklyWaterIntake(date) {
+    let lastDay;
+    this.data.forEach((hydration, index) => {
+      if (hydration.date === date) {
+        lastDay = index;
+      }
+    });
+
     return this.data
-      .slice(this.data.length - 7, this.data.length + 1)
+      .slice(lastDay - 6, lastDay + 1)
       .map(day => ({ ounces: day.numOunces, date: day.date }));
   }
 
