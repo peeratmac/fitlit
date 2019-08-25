@@ -55,17 +55,41 @@ describe('HYDRATION', () => {
     let userDataHydrations = hydrationRepo.getUserHydrationByID(3);
     let hydrationUser = new Hydration(userDataHydrations);
 
+    const weeklyWaterUser7 = [
+      {
+        date: '2019/06/16',
+        ounces: 99
+      },
+      {
+        date: '2019/06/17',
+        ounces: 28
+      },
+      {
+        date: '2019/06/18',
+        ounces: 40
+      },
+      {
+        date: '2019/06/19',
+        ounces: 85
+      },
+      {
+        date: '2019/06/20',
+        ounces: 51
+      },
+      {
+        date: '2019/06/21',
+        ounces: 41
+      },
+      {
+        date: '2019/06/22',
+        ounces: 78
+      }
+    ];
+
     expect(hydrationUser.getWeeklyWaterIntake().length).to.equal(7);
-    expect(hydrationUser.getWeeklyWaterIntake()).to.eql([
-      99,
-      28,
-      40,
-      85,
-      51,
-      41,
-      78
-    ]);
+    expect(hydrationUser.getWeeklyWaterIntake()).to.eql(weeklyWaterUser7);
   });
+
   it('should calculate the average fluid consumed per day for all time', () => {
     let hydrationRepo = new HydrationRepository(hydrationData);
     let userDataHydrations = hydrationRepo.getUserHydrationByID(3);

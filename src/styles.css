@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: 'Livvic', sans-serif;
 }
+
 body {
   background-color: lightgray;
 }
@@ -107,6 +108,7 @@ h3 {
 #friends {
   grid-area: b8;
 }
+
 container {
   text-align: center;
   width: 48%;

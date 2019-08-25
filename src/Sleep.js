@@ -74,7 +74,7 @@ class Sleep {
     let weeklyQualities = this.getWeeklyQualities(date);
 
     return weeklySleeps.map((hour, index) => {
-      return Number((hour * weeklyQualities[index]).toFixed(2));
+      return Number((hour.hours * weeklyQualities[index].quality).toFixed(2));
     });
   }
 }
