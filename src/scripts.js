@@ -20,7 +20,7 @@ $(document).ready(function() {
     (dailyStepGoal / globalStepAverage) * 100
   );
   const dailyWaterIntake = hydrationUser.getDailyWaterIntake(todayDate);
-  const weeklyWaterIntake = hydrationUser.getWeeklyWaterIntake();
+  const weeklyWaterIntake = hydrationUser.getWeeklyWaterIntake(todayDate);
   const lastNightSleep = sleepUser.getHoursSleptByDate(todayDate, userID);
   const weeklySleepArray = sleepUser.getWeeklySleeps(todayDate, userID);
   const weeklySleepQualityArray = sleepUser.getWeeklyQualities(
@@ -101,7 +101,7 @@ $(document).ready(function() {
     $(`.jq-user${friend.id}`).prepend(`${friend.name} steps: `);
   });
 
-  hydrationUser.getWeeklyWaterIntake().forEach(day => {
+  hydrationUser.getWeeklyWaterIntake(todayDate).forEach(day => {
     $('.water-history').append(`<p>${day.date} you drank ${day.ounces}oz.</p>`);
   });
 
@@ -113,9 +113,7 @@ $(document).ready(function() {
 
   sleepUser.getWeeklyQualities(todayDate).forEach(night => {
     $('.jq-week-quality').append(
-      `<p>On ${night.date} your sleep quality was rated at ${
-        night.quality
-      }.</p>`
+      `<p>On ${night.date} your sleep quality was rated at ${night.quality}.</p>`
     );
   });
 
@@ -126,12 +124,17 @@ $(document).ready(function() {
     return sleepUser.getWeeklySleeps(date).map(night => night.hours);
   };
 
+  // ! test mapping weekly sleep date
+  const getWeeklySleepDates = date => {
+    return sleepUser.getWeeklySleeps(date).map(night => night.date);
+  };
+
   let lastWeekSleepHoursChart = $('#TEST-CHART-SLEEP-1');
   let xLastWeekSleepHoursChart = new Chart(lastWeekSleepHoursChart, {
     type: 'bar',
 
     data: {
-      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', todayDate],
+      labels: getWeeklySleepDates(todayDate),
       datasets: [
         {
           label: 'Sleep Hours',
@@ -167,7 +170,7 @@ $(document).ready(function() {
         ]
       },
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: true
     }
   });
 
@@ -177,7 +180,7 @@ $(document).ready(function() {
   let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
     type: 'bar',
     data: {
-      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', todayDate],
+      labels: getWeeklySleepDates(todayDate),
       datasets: [
         {
           label: 'Sleep Scores',
@@ -213,16 +216,19 @@ $(document).ready(function() {
         ]
       },
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: true
     }
   });
 
   // ******** Water Chart **********
+  const getWeeklyWaterDates = date => {
+    return hydrationUser.getWeeklyWaterIntake(date).map(day => day.date);
+  };
   let lastWeekWaterChart = $('#TEST-CHART-WATER-1');
   let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
     type: 'line',
     data: {
-      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', todayDate],
+      labels: getWeeklyWaterDates(todayDate),
       datasets: [
         {
           label: 'Water Consumed (Ounces)',
@@ -235,8 +241,11 @@ $(document).ready(function() {
             '#fed330',
             '#fd9644'
           ],
-          data: hydrationUser.getWeeklyWaterIntake().map(day => day.ounces),
-          borderWidth: 1
+          data: hydrationUser
+            .getWeeklyWaterIntake(todayDate)
+            .map(day => day.ounces),
+          borderWidth: 1,
+          fill: false
         }
       ]
     },
@@ -255,7 +264,7 @@ $(document).ready(function() {
         ]
       },
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: true
     }
   });
 });
