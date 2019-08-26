@@ -117,17 +117,28 @@ $(document).ready(function() {
     );
   });
 
-  currentUser.friends
-    .map(id => ({
-      id: id,
-      weeklySteps: activityRepo.weeklyStepTotal(id, todayDate)
-    }))
+  currentUser.friends.concat(currentUser.id)
+    .map(id => ({ id: id, weeklySteps: activityRepo.weeklyStepTotal(id, todayDate)}))
     .sort((a, b) => b.weeklySteps - a.weeklySteps)
     .forEach(friend => {
       $('.jq-friend-week-steps').append(
-        `<li>${friend.weeklySteps} AND ID ${friend.id}</li>`
+        `<li id="jq-ws-${friend.id}">${friend.weeklySteps}</li>`
       );
     });
+  
+  userRepo.getFriends(currentUser.friends.concat(currentUser.id)).forEach(friend => {
+    $(`#jq-ws-${friend.id}`).prepend(`${friend.name}: `);
+  });
+
+
+  let weeklyWinnerId=currentUser.friends.concat(currentUser.id)
+    .map(id => ({ id:id , weeklySteps: activityRepo.weeklyStepTotal(id, todayDate)}))
+    .sort((a, b)  => b.weeklySteps - a.weeklySteps)[0].id
+
+  let weeklyWinner = userData.find(el => el.id === weeklyWinnerId).name
+    
+  $('.step-leader').append(`<h3>${weeklyWinner}</h3>`)
+
 
   // ! testing chart.js
   Chart.defaults.global.defaultFontFamily = 'Livvic';
