@@ -22,7 +22,7 @@ header {
 }
 
 h1 {
-  color: green;
+  color: #00b894;
   display: inline-block;
   margin: 0;
 }
@@ -48,6 +48,7 @@ main {
 
 section {
   background-color: white;
+  border-radius: 15px;
   margin-bottom: 10px;
   padding: 10px;
   width: 95%;
@@ -59,6 +60,7 @@ section div {
 
 h2 {
   border-bottom: 2px solid gray;
+  margin-bottom: 10px;
 }
 
 h3 {
@@ -70,27 +72,32 @@ h3 {
 }
 
 #mountain-pic {
-  width: 350px;
+  height: 75px;
+}
+
+#sunny-pic {
+  height: 100px;
+  margin-top: 50px;
 }
 
 .grid-item {
   float: left;
   width: 440px;
-  /* height: 400px; */
+  height: 200px;
   background: #ffffff;
   border: 2px solid #b6b5b4;
   grid-auto-rows: auto;
-}
-
-.grid-item-special {
-  width: 800px;
 }
 
 .grid-item--width2 {
   width: 900px;
 }
 .grid-item--height2 {
-  height: 800px;
+  height: 425px;
+}
+
+.grid-item--height3 {
+  height: 650px;
 }
 
 .grid-item.is-dragging,
@@ -107,5 +114,21 @@ h3 {
 }
 
 .step-leader {
-  color: green;
+  color: #00b894;
+}
+
+.day-streaks p {
+  display: inline-block;
+  margin: 5px 10px;
+}
+
+#step-increase div {
+  margin-left: 40px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.green {
+  color: #00b894;
+  font-weight: 700;
 }
