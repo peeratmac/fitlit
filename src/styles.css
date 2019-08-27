@@ -113,10 +113,6 @@ h3 {
   -webkit-transition: -webkit-transform 0.2s;
 }
 
-.step-leader {
-  color: #00b894;
-}
-
 .day-streaks p {
   display: inline-block;
   margin: 5px 10px;

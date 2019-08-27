@@ -113,9 +113,15 @@ currentUser.friends
   }))
   .sort((a, b) => b.weeklySteps - a.weeklySteps)
   .forEach(friend => {
-    $('.jq-friend-week-steps').append(
-      `<li id="jq-ws-${friend.id}">${friend.weeklySteps}</li>`
-    );
+    if (friend.id === currentUser.id) {
+      $('.jq-friend-week-steps').append(
+        `<b><li class="green" id="jq-ws-${friend.id}">${friend.weeklySteps}</li></b>`
+      );
+    } else {
+      $('.jq-friend-week-steps').append(
+        `<li id="jq-ws-${friend.id}">${friend.weeklySteps}</li>`
+      );
+    }
   });
 
 userRepo
