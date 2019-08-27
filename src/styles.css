@@ -75,7 +75,7 @@ h3 {
 
 .grid-item {
   float: left;
-  width: 400px;
+  width: 440px;
   /* height: 400px; */
   background: #ffffff;
   border: 2px solid #b6b5b4;
@@ -87,10 +87,10 @@ h3 {
 }
 
 .grid-item--width2 {
-  width: 120px;
+  width: 900px;
 }
 .grid-item--height2 {
-  height: 120px;
+  height: 800px;
 }
 
 .grid-item.is-dragging,

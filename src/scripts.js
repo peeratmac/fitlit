@@ -1,27 +1,6 @@
-let $grid = $('.grid').packery({
-  itemSelector: '.grid-item',
-  columnWidth: 100
-});
-
-$('.grid').packery({
-  itemSelector: '.grid-item',
-  gutter: 15,
-  percentPosition: true,
-  columnWidth: 100
-});
-
-let $draggable = $('.draggable').draggabilly('enable');
-
-$grid.find('.grid-item').each(function(i, gridItem) {
-  let draggie = new Draggabilly(gridItem);
-  $grid.packery('bindDraggabillyEvents', draggie);
-});
-
 const todayDate = `${new Date().getFullYear()}/${String(
   new Date().getMonth() + 1
 ).padStart(2, '0')}/${String(new Date().getDate()).padStart(2, '0')}`;
-
-// $(document).ready(function() {
 
 const userRepo = new UserRepository(userData);
 let userID = Math.ceil(Math.random() * userRepo.data.length);
@@ -404,4 +383,19 @@ let xFriendsChart = new Chart(friendsChart, {
   }
 });
 
-// });
+//Packery and Dragability
+let $grid = $('.grid').packery({
+  itemSelector: '.grid-item',
+  columnWidth: 100
+});
+
+$('.grid').packery({ itemSelector: '.grid-item', gutter: 15, percentPosition: true, columnWidth: 100 });
+
+let $draggable = $(".draggable").draggabilly("enable");
+
+$grid.find('.grid-item').each(function (i, gridItem) {
+  let draggie = new Draggabilly(gridItem);
+  $grid.packery('bindDraggabillyEvents', draggie);
+});
+
+// end Packery and Dragability
