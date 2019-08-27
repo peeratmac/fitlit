@@ -73,7 +73,7 @@ $('.all-average-stairs').text(
 $('.mountain').text(activity.compareMilesWalkedToHike(currentUser));
 
 activity.getDaysWithStepsTrend().forEach(day => {
-  $('.day-streaks').append(`<li>${day}</li>`);
+  $('.day-streaks').prepend(`<p>${day}</p>`);
 });
 
 activityRepo
@@ -113,9 +113,15 @@ currentUser.friends
   }))
   .sort((a, b) => b.weeklySteps - a.weeklySteps)
   .forEach(friend => {
-    $('.jq-friend-week-steps').append(
-      `<li id="jq-ws-${friend.id}">${friend.weeklySteps}</li>`
-    );
+    if (friend.id === currentUser.id) {
+      $('.jq-friend-week-steps').append(
+        `<b><li class="green" id="jq-ws-${friend.id}">${friend.weeklySteps}</li></b>`
+      );
+    } else {
+      $('.jq-friend-week-steps').append(
+        `<li id="jq-ws-${friend.id}">${friend.weeklySteps}</li>`
+      );
+    }
   });
 
 userRepo
@@ -166,8 +172,8 @@ new Chart(lastWeekSleepHoursChart, {
           '#a55eea',
           '#26de81',
           '#2bcbba',
-          '#fed330',
-          '#fd9644'
+          '#a29bfe',
+          '#00b894'
         ],
         data: getWeeklyQualitiesArray(todayDate),
         borderWidth: 1,
@@ -183,8 +189,8 @@ new Chart(lastWeekSleepHoursChart, {
           '#a55eea',
           '#26de81',
           '#2bcbba',
-          '#fed330',
-          '#fd9644'
+          '#a29bfe',
+          '#00b894'
         ],
         data: getWeeklySleepsArray(todayDate),
         type: 'line',
@@ -227,8 +233,8 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
           '#a55eea',
           '#26de81',
           '#2bcbba',
-          '#fed330',
-          '#fd9644'
+          '#a29bfe',
+          '#00b894'
         ],
         data: weeklySleepScores,
         borderWidth: 1,
@@ -240,8 +246,8 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
   },
   options: {
     title: {
-      display: true,
-      text: 'Weekly Sleep Scores (Points)'
+      display: true
+      // text: ''
     },
     scales: {
       yAxes: [
@@ -276,7 +282,7 @@ let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
           '#26de81',
           '#2bcbba',
           '#fed330',
-          '#fd9644'
+          '#00b894'
         ],
         data: hydrationUser
           .getWeeklyWaterIntake(todayDate)
@@ -315,7 +321,7 @@ let xAllTimeActivityChart = new Chart(allTimeActivityChart, {
     datasets: [
       {
         label: 'Steps',
-        backgroundColor: 'red',
+        backgroundColor: '#00b894',
         data: activityRepo.getUserActivityAllTime(userID)
       }
     ]
@@ -339,61 +345,22 @@ let xAllTimeActivityChart = new Chart(allTimeActivityChart, {
   }
 });
 
-// YOU and YOUR FRIENDS STEPS
-const getFriendsSteps = (currentUserFriends, todayDate) =>
-  activityRepo
-    .getFriendsListStepCount(currentUserFriends, todayDate)
-    .sort((a, b) => b.steps - a.steps);
-
-let friendsChart = $('#TEST-CHART-FRIENDS');
-let xFriendsChart = new Chart(friendsChart, {
-  type: 'horizontalBar',
-  data: {
-    labels: userRepo.getFriends(currentUser.friends).reduce((acc, friend) => {
-      acc.push(friend.name);
-      return acc;
-    }, []),
-    datasets: [
-      {
-        label: 'Steps',
-        backgroundColor: 'yellow',
-        data: [
-          activity.getWeeklySteps(todayDate),
-          getFriendsSteps(currentUser.friends, todayDate)
-        ]
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'Weekly Steps'
-    },
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true
-          }
-        }
-      ]
-    },
-    responsive: true,
-    maintainAspectRatio: false
-  }
-});
-
 //Packery and Dragability
 let $grid = $('.grid').packery({
   itemSelector: '.grid-item',
   columnWidth: 100
 });
 
-$('.grid').packery({ itemSelector: '.grid-item', gutter: 15, percentPosition: true, columnWidth: 100 });
+$('.grid').packery({
+  itemSelector: '.grid-item',
+  gutter: 15,
+  percentPosition: true,
+  columnWidth: 100
+});
 
-let $draggable = $(".draggable").draggabilly("enable");
+let $draggable = $('.draggable').draggabilly('enable');
 
-$grid.find('.grid-item').each(function (i, gridItem) {
+$grid.find('.grid-item').each(function(i, gridItem) {
   let draggie = new Draggabilly(gridItem);
   $grid.packery('bindDraggabillyEvents', draggie);
 });

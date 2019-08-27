@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css?family=Livvic:400,400i,700&display=swap" rel="stylesheet">
   <title>FitLit</title>
 </head>
-
 <body>
   <header>
     <h1>FitLit</h1>
@@ -15,31 +14,31 @@
     <p class="date-today"><img src=""></p>
   </header>
   <main class="grid">
-    <section class="grid-item draggable user-info">
+    <section class="grid-item draggable user-info grid-item--width2">
       <h2>Hi <span class="user-first-name"></span></h2>
       <p>Email: <span class="email"></span></p>
       <p>Address: <span class="address"></span></p>
       <p>Stride Length: <span class="stride"></span> ft.</p>
-      <p>You have taken <span class="current-steps"></span> steps of your goal <span class="step-goal-card"></span> step
+      <p>You have taken <span class="current-steps green"></span> steps of your goal <span class="step-goal-card"></span> step
         goal.</p>
       <p>You have been active for
-        <span class="active-minutes"></span> minutes and have climbed
-        <span class="current-flight-of-stairs"></span> flights of stairs.</p>
+        <span class="active-minutes green"></span> minutes and have climbed
+        <span class="current-flight-of-stairs green"></span> flights of stairs.</p>
     </section>
-    <section class="grid-item draggable" id="hydration">
+    <section class="grid-item draggable grid-item--height2" id="hydration">
       <h2>Hydration</h2>
-      <p>You have had <span class="water"></span> ounces of water today so far.</p>
+      <p>You have had <span class="water green"></span> ounces of water today so far.</p>
       <h3>Hydration Statistics For The Last 7 Days</h3><br>
       <div class="TEST-CHART-JS">
-        <canvas id="TEST-CHART-WATER-1" width="600" height="600"></canvas>
+        <canvas id="TEST-CHART-WATER-1" width="440" height="250"></canvas>
       </div>
     </section>
-    <section class="grid-item draggable" id="sleep">
+    <section class="grid-item draggable grid-item--height3" id="sleep">
       <h2>Sleep</h2>
-      <p>You slept for <span class="user-sleep"></span> hours last night.</p><br>
+      <p>You slept for <span class="user-sleep green"></span> hours last night.</p><br>
       <h3>Sleep Statisics For The Last 7 Days (Sleep Hours with Sleep Quality)</h3><br>
       <div class="TEST-CHART-JS">
-        <canvas id="TEST-CHART-SLEEP-1" width="600" height="600"></canvas>
+        <canvas id="TEST-CHART-SLEEP-1" width="440" height="370"></canvas>
       </div>
       <h3>Your All Time Average Sleep Stats</h3>
       <p>Average Hours Slept: <span class="jq-all-time-sleep-average"></span></p>
@@ -59,10 +58,10 @@
         <li>Average Stairs climbed: <span class="weekly-stairs"></span> flights</li>
       </ul>
     </section>
-    <section class="grid-item draggable grid-item-special">
+    <section class="grid-item draggable grid-item--width2 grid-item--height2">
     <h3>ALL Time Activity</h3>
       <div>
-        <canvas id="TEST-CHART-ACTIVITY-ALL" width="200" height="600"></canvas>
+        <canvas id="TEST-CHART-ACTIVITY-ALL" width="200" height="380"></canvas>
       </div>
     </section>
     <section class="grid-item draggable" id="steps">
@@ -71,17 +70,17 @@
       <img id="mountain-pic" src="../images/mt-rainier.svg" alt="Mount Rainier SVG">
       <p><span class="mountain"></span></p>
     </section>
-    <section class="grid-item draggable" id="trend">
-      <h2>Trend</h2>
+    <section class="grid-item draggable grid-item--height2" id="trend">
+      <h2>Weekly Sleep Scores</h2>
       <div class="TEST-CHART-JS">
-        <canvas id="TEST-CHART-SLEEP-2" width="600" height="600"></canvas>
+        <canvas id="TEST-CHART-SLEEP-2" width="600" height="360"></canvas>
       </div>
     </section>
-    <section class="grid-item draggable" id="step-increase">
+    <section class="grid-item draggable grid-item--height2" id="step-increase">
       <h2>Days getting better</h2>
-      <ul><span class="day-streaks"></span></ul>
+      <div class="day-streaks"></div>
     </section>
-    <section class="grid-item draggable" id="comparison">
+    <section class="grid-item draggable grid-item--height2" id="comparison">
       <h2>You vs. the World</h2>
       <h3>Step Goals</h3>
       <p>You: <span class="user-step-goal"></span> steps. The World:
@@ -101,18 +100,18 @@
       </div>
     </section>
     </div>
-    <section class="grid-item draggable" id="friends">
+    <section class="grid-item draggable grid-item--height2" id="friends">
       <h2>Friends</h2>
+      <container>
+        <h3>This Week's Leader</h3>
+        <h1 class="step-leader"></h1>
+      </container>
       <container>
         <h3>Today's Steps Count</h3>
         <ul class="friend-list"></ul>
       </container>
       <h3>Last 7 Days Steps Count</h3>
       <ul class="jq-friend-week-steps"></ul>
-      <container>
-        <h3>This Week's Leader</h3>
-        <h1 class="step-leader"></h1>
-      </container>
       <div>
         <canvas id="TEST-CHART-FRIENDS" width="400" height="400"></canvas>
       </div>
