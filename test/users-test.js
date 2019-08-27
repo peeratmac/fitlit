@@ -20,6 +20,15 @@ describe('USER REPOSITORY', () => {
     let userRepo = new UserRepository(userData);
     expect(userRepo.averageUserStepGoal()).to.equal(6200);
   });
+
+  it('should be able to tell you about their friends', () => {
+    let userRepo = new UserRepository(userData);
+    expect(userRepo.getFriends([2, 3, 4])).to.eql([
+      { name: 'Jarvis Considine', id: 2 },
+      { name: 'Herminia Witting', id: 3 },
+      { name: 'Mae Connelly', id: 4 }
+    ]);
+  });
 });
 
 describe('USERS', () => {

@@ -14,11 +14,14 @@ class SleepRepository {
     }, 0);
     return Number((totalQuality / this.data.length).toFixed(1));
   }
+
   getAllUsersId() {
     return this.data
       .map(sleep => sleep.userID)
       .reduce((acc, idNumber) => {
-        if (!acc.includes(idNumber)) acc.push(idNumber);
+        if (!acc.includes(idNumber)) {
+          acc.push(idNumber);
+        }
         return acc;
       }, []);
   }
