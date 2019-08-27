@@ -1,136 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" type="text/css" href="normalize.css" />
-  <link rel="stylesheet" type="text/css" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css?family=Livvic:400,400i,700&display=swap" rel="stylesheet">
-  <title>FitLit</title>
-</head>
-
-<body>
-  <header>
-    <h1>FitLit</h1>
-    <p class="user-name"></p>
-    <p class="date-today"><img src=""></p>
-  </header>
-  <main class="grid">
-    <div class="grid-item draggable user-info">
-      <h2>Hi <span class="user-first-name"></span></h2>
-      <p>Email: <span class="email"></span></p>
-      <p>Address: <span class="address"></span></p>
-      <p>Stride Length: <span class="stride"></span> ft.</p>
-      <p>You have taken <span class="current-steps"></span> steps of your goal <span class="step-goal-card"></span> step
-        goal.</p>
-      <p>You have been active for
-        <span class="active-minutes"></span> minutes and have climbed
-        <span class="current-flight-of-stairs"></span> flights of stairs.</p>
-    </div>
-    <div class="grid-item draggable" id="hydration">
-      <h2>Hydration</h2>
-      <p>You have had <span class="water"></span> ounces of water today so far.</p>
-      <p>Over the last 7 days, you have consumed: <span class="water-history"></span></p>
-    </div>
-    <div class="grid-item draggable" id="sleep">
-      <h2>Sleep</h2>
-      <p>You slept for <span class="user-sleep"></span> hours last night.</p><br>
-      <h3>Sleep Statisics For The Last 7 Days</h3>
-      <p><span class="user-sleep-average"></span> hours.</p><br>
-      <p>Last weeks sleep was rated at <span class="jq-week-quality"></span> points.</p>
-      <h3>Your All Time Average Sleep Stats</h3>
-      <p>Average Hours Slept: <span class="jq-all-time-sleep-average"></span></p>
-      <p>Average Quality of Sleep: <span class="jq-all-time-quality-average"></span></p>
-    </div>
-    <div class="grid-item draggable" id="activity">
-      <h2>Activity</h2>
-      <ul>
-        <li>Active Time: <span class="active-minutes"></span> minutes.</li>
-        <li>Steps today: <span class="current-steps"></span></li>
-        <li>Distance Walked: <span class="miles-walked"></span> miles</li>
-      </ul>
-      <h3>This Week</h3>
-      <ul>
-        <li>Average Activity: <span class="weekly-minutes-active"></span> minutes</li>
-        <li>Aveage Steps Taken: <span class="weekly-steps"></span></li>
-        <li>Average Stairs climbed: <span class="weekly-stairs"></span> flights</li>
-      </ul>
-    </div>
-    <div class="grid-item draggable" id="steps">
-      <h2>Fun Fact</h2>
-      <h3>Mountain Climbing</h3>
-      <img id="mountain-pic" src="../images/mt-rainier.svg" alt="Mount Rainier SVG">
-      <p><span class="mountain"></span></p>
-    </div>
-    <div class="grid-item draggable" id="trend">
-      <h2>Trend</h2>
-    </div>
-    <div class="grid-item draggable" id="step-increase">
-      <h2>Days getting better</h2>
-      <ul><span class="day-streaks"></span></ul>
-    </div>
-    <div class="grid-item draggable" id="comparison">
-      <h2>You vs. the World</h2>
-      <h3>Step Goals</h3>
-      <p>You: <span class="user-step-goal"></span> steps. The World:
-        <span class="average-all-step-goal"></span>steps.
-      </p>
-      <p>Your goal is <span class="step-goal-percent"></span>% of the global average.</p>
-      <h3>Steps Taken</h3>
-      <p>You: <span class="current-steps"></span> The World: <span class="all-average-steps"></span></p>
-      <h3>Activity Minutes</h3>
-      <p>You: <span class="active-minutes"></span> The World: <span class="all-average-minutes"></span></p>
-      <h3>Flights of Stairs Climbed</h3>
-      <p>You: <span class="current-flight-of-stairs"></span> The World: <span class="all-average-stairs"></span></p>
-      <div>
-        <h3>You achieve your step goal</h3>
-        <h1 class="jq-percent-achieve"></h1>
-        <h3>of the time.</h3>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="normalize.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Livvic:400,400i,700&display=swap" rel="stylesheet">
+    <title>FitLit</title>
+  </head>
+  <body>
+    <header>
+      <h1>FitLit</h1>
+      <p class="user-name"></p>
+      <p class="date-today"><img src=""></p>
+    </header>
+    <main class="grid">
+      <div class="grid-item grid-item--width2 draggable user-info">
+        <h2>Hi <span class="user-first-name"></span></h2>
+        <p>Email: <span class="email"></span></p>
+        <p>Address: <span class="address"></span></p>
+        <p>Stride Length: <span class="stride"></span> ft.</p>
+        <p>You have taken <span class="current-steps"></span> steps of your goal <span class="step-goal-card"></span> step
+          goal.</p>
+        <p>You have been active for
+          <span class="active-minutes"></span> minutes and have climbed
+          <span class="current-flight-of-stairs"></span> flights of stairs.</p>
       </div>
-    </div>
-    </div>
-    <div class="grid-item draggable" id="friends">
-      <h2>Friends</h2>
-      <container>
-        <h3>Today's Steps Count</h3>
-        <ul class="friend-list"></ul>
-        <h3>Today's Leader</h3>
-      </container>
-      <h3>Last 7 Days Steps Count</h3>
-      <ul class="jq-friend-week-steps"></ul>
-      <container>
-        <h3>This Week's Leader</h3>
-        <p class="step-leader"></p>
-      </container>
-    </div>
-    <div class="grid-item draggable TEST-CHART-JS">
-      <canvas id="TEST-CHART-SLEEP-1"></canvas>
-    </div>
-    <div class="grid-item draggable TEST-CHART-JS">
-      <canvas id="TEST-CHART-SLEEP-2"></canvas>
-    </div>
-    <div class="grid-item draggable TEST-CHART-JS">
-      <canvas id="TEST-CHART-WATER-1"></canvas>
-    </div>
-  </main>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-  <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
-  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.js"></script>
-  <script type="text/javascript" src="./User.js"></script>
-  <script type="text/javascript" src="./User-repository.js"></script>
-  <script type="text/javascript" src="./Hydration-repository.js"></script>
-  <script type="text/javascript" src="./Sleep-repository.js"></script>
-  <script type="text/javascript" src="./Activity-repository.js"></script>
-  <script type="text/javascript" src="../data/activity.js"></script>
-  <script type="text/javascript" src="../data/hydration.js"></script>
-  <script type="text/javascript" src="../data/users.js"></script>
-  <script type="text/javascript" src="../data/sleep.js"></script>
-  <script type="text/javascript" src="./Hydration.js"></script>
-  <script type="text/javascript" src="./Activity.js"></script>
-  <script type="text/javascript" src="./Sleep.js"></script>
-  <script type="text/javascript" src="./scripts.js"></script>
-</body>
-
+      <div class="grid-item draggable" id="hydration">
+        <h2>Hydration</h2>
+        <p>You have had <span class="water"></span> ounces of water today so far.</p>
+        <p>Over the last 7 days, you have consumed: <span class="water-history"></span></p>
+      </div>
+      <div class="grid-item draggable" id="sleep">
+        <h2>Sleep</h2>
+        <p>You slept for <span class="user-sleep"></span> hours last night.</p><br>
+        <h3>Sleep Statisics For The Last 7 Days</h3>
+        <p><span class="user-sleep-average"></span> hours.</p><br>
+        <p>Last weeks sleep was rated at <span class="jq-week-quality"></span> points.</p>
+        <h3>Your All Time Average Sleep Stats</h3>
+        <p>Average Hours Slept: <span class="jq-all-time-sleep-average"></span></p>
+        <p>Average Quality of Sleep: <span class="jq-all-time-quality-average"></span></p>
+      </div>
+      <div class="grid-item draggable" id="activity">
+        <h2>Activity</h2>
+        <ul>
+          <li>Active Time: <span class="active-minutes"></span> minutes.</li>
+          <li>Steps today: <span class="current-steps"></span></li>
+          <li>Distance Walked: <span class="miles-walked"></span> miles</li>
+        </ul>
+        <h3>This Week</h3>
+        <ul>
+          <li>Average Activity: <span class="weekly-minutes-active"></span> minutes</li>
+          <li>Aveage Steps Taken: <span class="weekly-steps"></span></li>
+          <li>Average Stairs climbed: <span class="weekly-stairs"></span> flights</li>
+        </ul>
+      </div>
+      <div class="grid-item draggable" id="steps">
+        <h2>Fun Fact</h2>
+        <h3>Mountain Climbing</h3>
+        <img id="mountain-pic" src="../images/mt-rainier.svg" alt="Mount Rainier SVG">
+        <p><span class="mountain"></span></p>
+      </div>
+      <div class="grid-item draggable" id="trend">
+        <h2>Trend</h2>
+      </div>
+      <div class="grid-item draggable" id="step-increase">
+        <h2>Days getting better</h2>
+        <ul><span class="day-streaks"></span></ul>
+      </div>
+      <div class="grid-item draggable" id="comparison">
+        <h2>You vs. the World</h2>
+        <h3>Step Goals</h3>
+        <p>You: <span class="user-step-goal"></span> steps. The World:
+          <span class="average-all-step-goal"></span>steps.
+        </p>
+        <p>Your goal is <span class="step-goal-percent"></span>% of the global average.</p>
+        <h3>Steps Taken</h3>
+        <p>You: <span class="current-steps"></span> The World: <span class="all-average-steps"></span></p>
+        <h3>Activity Minutes</h3>
+        <p>You: <span class="active-minutes"></span> The World: <span class="all-average-minutes"></span></p>
+        <h3>Flights of Stairs Climbed</h3>
+        <p>You: <span class="current-flight-of-stairs"></span> The World: <span class="all-average-stairs"></span></p>
+        <div>
+          <h3>You achieve your step goal</h3>
+          <h1 class="jq-percent-achieve"></h1>
+          <h3>of the time.</h3>
+        </div>
+      </div>
+      </div>
+      <div class="grid-item draggable" id="friends">
+        <h2>Friends</h2>
+        <container>
+          <h3>Today's Steps Count</h3>
+          <ul class="friend-list"></ul>
+          <h3>Today's Leader</h3>
+        </container>
+        <h3>Last 7 Days Steps Count</h3>
+        <ul class="jq-friend-week-steps"></ul>
+        <container>
+          <h3>This Week's Leader</h3>
+          <p class="step-leader"></p>
+        </container>
+      </div>
+      <div class="grid-item draggable TEST-CHART-JS">
+        <canvas id="TEST-CHART-SLEEP-1"></canvas>
+      </div>
+      <div class="grid-item draggable TEST-CHART-JS">
+        <canvas id="TEST-CHART-SLEEP-2"></canvas>
+      </div>
+      <div class="grid-item draggable TEST-CHART-JS">
+        <canvas id="TEST-CHART-WATER-1"></canvas>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+    <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
+    <script type="text/javascript" src="./User.js"></script>
+    <script type="text/javascript" src="./User-repository.js"></script>
+    <script type="text/javascript" src="./Hydration-repository.js"></script>
+    <script type="text/javascript" src="./Sleep-repository.js"></script>
+    <script type="text/javascript" src="./Activity-repository.js"></script>
+    <script type="text/javascript" src="../data/activity.js"></script>
+    <script type="text/javascript" src="../data/hydration.js"></script>
+    <script type="text/javascript" src="../data/users.js"></script>
+    <script type="text/javascript" src="../data/sleep.js"></script>
+    <script type="text/javascript" src="./Hydration.js"></script>
+    <script type="text/javascript" src="./Activity.js"></script>
+    <script type="text/javascript" src="./Sleep.js"></script>
+    <script type="text/javascript" src="./scripts.js"></script>
+  </body>
 </html>
