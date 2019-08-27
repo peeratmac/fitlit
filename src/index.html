@@ -16,7 +16,7 @@
     <p class="date-today"><img src=""></p>
   </header>
   <main class="grid">
-    <div class="grid-item draggable user-info">
+    <section class="grid-item draggable user-info">
       <h2>Hi <span class="user-first-name"></span></h2>
       <p>Email: <span class="email"></span></p>
       <p>Address: <span class="address"></span></p>
@@ -26,8 +26,8 @@
       <p>You have been active for
         <span class="active-minutes"></span> minutes and have climbed
         <span class="current-flight-of-stairs"></span> flights of stairs.</p>
-    </div>
-    <div class="grid-item draggable" id="hydration">
+    </section>
+    <section class="grid-item draggable" id="hydration">
       <h2>Hydration</h2>
       <p>You have had <span class="water"></span> ounces of water today so far.</p>
       <!-- <p>Over the last 7 days, you have consumed: <span class="water-history"></span></p> -->
@@ -35,8 +35,8 @@
       <div class="TEST-CHART-JS">
         <canvas id="TEST-CHART-WATER-1" width="600" height="600"></canvas>
       </div>
-    </div>
-    <div class="grid-item draggable" id="sleep">
+    </section>
+    <section class="grid-item draggable" id="sleep">
       <h2>Sleep</h2>
       <p>You slept for <span class="user-sleep"></span> hours last night.</p><br>
       <h3>Sleep Statisics For The Last 7 Days (Sleep Hours with Sleep Quality)</h3><br>
@@ -48,8 +48,8 @@
       <h3>Your All Time Average Sleep Stats</h3>
       <p>Average Hours Slept: <span class="jq-all-time-sleep-average"></span></p>
       <p>Average Quality of Sleep: <span class="jq-all-time-quality-average"></span></p>
-    </div>
-    <div class="grid-item draggable" id="activity">
+    </section>
+    <section class="grid-item draggable" id="activity">
       <h2>Activity</h2>
       <ul>
         <li>Active Time: <span class="active-minutes"></span> minutes.</li>
@@ -62,24 +62,24 @@
         <li>Aveage Steps Taken: <span class="weekly-steps"></span></li>
         <li>Average Stairs climbed: <span class="weekly-stairs"></span> flights</li>
       </ul>
-    </div>
-    <div class="grid-item draggable" id="steps">
+    </section>
+    <section class="grid-item draggable" id="steps">
       <h2>Fun Fact</h2>
       <h3>Mountain Climbing</h3>
       <img id="mountain-pic" src="../images/mt-rainier.svg" alt="Mount Rainier SVG">
       <p><span class="mountain"></span></p>
-    </div>
-    <div class="grid-item draggable" id="trend">
+    </section>
+    <section class="grid-item draggable" id="trend">
       <h2>Trend</h2>
       <div class="TEST-CHART-JS">
         <canvas id="TEST-CHART-SLEEP-2" width="600" height="600"></canvas>
       </div>
-    </div>
-    <div class="grid-item draggable" id="step-increase">
+    </section>
+    <section class="grid-item draggable" id="step-increase">
       <h2>Days getting better</h2>
       <ul><span class="day-streaks"></span></ul>
-    </div>
-    <div class="grid-item draggable" id="comparison">
+    </section>
+    <section class="grid-item draggable" id="comparison">
       <h2>You vs. the World</h2>
       <h3>Step Goals</h3>
       <p>You: <span class="user-step-goal"></span> steps. The World:
@@ -97,9 +97,9 @@
         <h1 class="jq-percent-achieve"></h1>
         <h3>of the time.</h3>
       </div>
+    </section>
     </div>
-    </div>
-    <div class="grid-item draggable" id="friends">
+    <section class="grid-item draggable" id="friends">
       <h2>Friends</h2>
       <container>
         <h3>Today's Steps Count</h3>
@@ -111,16 +111,7 @@
         <h3>This Week's Leader</h3>
         <h1 class="step-leader"></h1>
       </container>
-    </div>
-    <!-- <div class="grid-item draggable TEST-CHART-JS">
-      <canvas id="TEST-CHART-SLEEP-1" width="600" height="600"></canvas>
-    </div>
-    <div class="grid-item draggable TEST-CHART-JS">
-      <canvas id="TEST-CHART-SLEEP-2" width="600" height="600"></canvas>
-    </div>
-    <div class="grid-item draggable TEST-CHART-JS">
-      <canvas id="TEST-CHART-WATER-1" width="600" height="600"></canvas>
-    </div> -->
+    </section>
   </main>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>

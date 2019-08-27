@@ -279,7 +279,6 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
 });
 
 // * Weekly Water
-var ctx = $('#TEST-CHART-WATER-1').getContext;
 const getWeeklyWaterDates = date => {
   return hydrationUser.getWeeklyWaterIntake(date).map(day => day.date);
 };
@@ -327,4 +326,5 @@ let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
     maintainAspectRatio: true
   }
 });
+
 // });
