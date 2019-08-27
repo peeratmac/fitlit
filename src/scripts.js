@@ -274,7 +274,7 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
       ]
     },
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: false
   }
 });
 
@@ -323,7 +323,84 @@ let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
       ]
     },
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: false
+  }
+});
+
+// * ALL TIME ACTIVITY (STEPS)
+let allTimeActivityChart = $('#TEST-CHART-ACTIVITY-ALL');
+let xAllTimeActivityChart = new Chart(allTimeActivityChart, {
+  type: 'bar',
+  data: {
+    labels: activityRepo.getAllTimeDates(userID),
+    datasets: [
+      {
+        label: 'Steps',
+        backgroundColor: 'red',
+        data: activityRepo.getUserActivityAllTime(userID)
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'All Time Steps'
+    },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      ]
+    },
+    responsive: true,
+    maintainAspectRatio: false
+  }
+});
+
+// YOU and YOUR FRIENDS STEPS
+const getFriendsSteps = (currentUserFriends, todayDate) =>
+  activityRepo
+    .getFriendsListStepCount(currentUserFriends, todayDate)
+    .sort((a, b) => b.steps - a.steps);
+
+let friendsChart = $('#TEST-CHART-FRIENDS');
+let xFriendsChart = new Chart(friendsChart, {
+  type: 'horizontalBar',
+  data: {
+    labels: userRepo.getFriends(currentUser.friends).reduce((acc, friend) => {
+      acc.push(friend.name);
+      return acc;
+    }, []),
+    datasets: [
+      {
+        label: 'Steps',
+        backgroundColor: 'yellow',
+        data: [
+          activity.getWeeklySteps(todayDate),
+          getFriendsSteps(currentUser.friends, todayDate)
+        ]
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Weekly Steps'
+    },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      ]
+    },
+    responsive: true,
+    maintainAspectRatio: false
   }
 });
 

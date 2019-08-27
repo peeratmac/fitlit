@@ -82,6 +82,10 @@ h3 {
   grid-auto-rows: auto;
 }
 
+.grid-item-special {
+  width: 800px;
+}
+
 .grid-item--width2 {
   width: 120px;
 }
