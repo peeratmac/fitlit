@@ -147,3 +147,7 @@ container {
   transition: transform 0.2s;
   -webkit-transition: -webkit-transform 0.2s;
 }
+
+.step-leader {
+  color: green;
+}
