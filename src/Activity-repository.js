@@ -38,6 +38,14 @@ class ActivityRepository {
 
     return weeklyTotal;
   }
+
+  getUserActivityAllTime(idNumber) {
+    return this.getUserActivityData(idNumber).map(user => user.numSteps);
+  }
+
+  getAllTimeDates(idNumber) {
+    return this.getUserActivityData(idNumber).map(user => user.date);
+  }
 }
 
 if (typeof module !== 'undefined') {

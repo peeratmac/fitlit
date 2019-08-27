@@ -3,25 +3,25 @@ let $grid = $('.grid').packery({
   columnWidth: 100
 });
 
-$('.grid').packery({ itemSelector: '.grid-item', gutter: 15, percentPosition: true, columnWidth: 100 });
+$('.grid').packery({
+  itemSelector: '.grid-item',
+  gutter: 15,
+  percentPosition: true,
+  columnWidth: 100
+});
 
-let $draggable = $(".draggable").draggabilly("enable");
+let $draggable = $('.draggable').draggabilly('enable');
 
-$grid.find('.grid-item').each(function (i, gridItem) {
+$grid.find('.grid-item').each(function(i, gridItem) {
   let draggie = new Draggabilly(gridItem);
   $grid.packery('bindDraggabillyEvents', draggie);
 });
-
 
 const todayDate = `${new Date().getFullYear()}/${String(
   new Date().getMonth() + 1
 ).padStart(2, '0')}/${String(new Date().getDate()).padStart(2, '0')}`;
 
-
-
-
 // $(document).ready(function() {
-
 
 const userRepo = new UserRepository(userData);
 let userID = Math.ceil(Math.random() * userRepo.data.length);
@@ -157,25 +157,45 @@ let weeklyWinner = userData.find(el => el.id === weeklyWinnerId).name;
 
 $('.step-leader').append(`<h3>${weeklyWinner}</h3>`);
 
-// ! testing chart.js
+// ! * Chart.js
 Chart.defaults.global.defaultFontFamily = 'Livvic';
-// * for mapping sleep hours in a correct format
 const getWeeklySleepsArray = date => {
   return sleepUser.getWeeklySleeps(date).map(night => night.hours);
 };
 
-// ! test mapping weekly sleep date
+const getWeeklyQualitiesArray = date => {
+  return sleepUser.getWeeklyQualities(date).map(night => night.quality);
+};
+
+// * Sleep Hours
 const getWeeklySleepDates = date => {
   return sleepUser.getWeeklySleeps(date).map(night => night.date);
 };
 
 let lastWeekSleepHoursChart = $('#TEST-CHART-SLEEP-1');
-let xLastWeekSleepHoursChart = new Chart(lastWeekSleepHoursChart, {
+new Chart(lastWeekSleepHoursChart, {
   type: 'bar',
 
   data: {
     labels: getWeeklySleepDates(todayDate),
     datasets: [
+      {
+        label: 'Sleep Quality',
+        backgroundColor: [
+          '#45aaf2',
+          '#4b7bec',
+          '#a55eea',
+          '#26de81',
+          '#2bcbba',
+          '#fed330',
+          '#fd9644'
+        ],
+        data: getWeeklyQualitiesArray(todayDate),
+        borderWidth: 1,
+        borderColor: '#777',
+        hoverBorderWidth: 3,
+        hoverBorderColor: '#000'
+      },
       {
         label: 'Sleep Hours',
         backgroundColor: [
@@ -188,10 +208,8 @@ let xLastWeekSleepHoursChart = new Chart(lastWeekSleepHoursChart, {
           '#fd9644'
         ],
         data: getWeeklySleepsArray(todayDate),
-        borderWidth: 1,
-        borderColor: '#777',
-        hoverBorderWidth: 3,
-        hoverBorderColor: '#000'
+        type: 'line',
+        fill: false
       }
     ]
   },
@@ -210,12 +228,12 @@ let xLastWeekSleepHoursChart = new Chart(lastWeekSleepHoursChart, {
       ]
     },
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: false
   }
 });
 
+// * Sleep Scores
 let weeklySleepScores = sleepUser.getWeeklySleepScores(todayDate);
-
 let lastWeekSleepScoresChart = $('#TEST-CHART-SLEEP-2');
 let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
   type: 'bar',
@@ -256,11 +274,11 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
       ]
     },
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: false
   }
 });
 
-// ******** Water Chart **********
+// * Weekly Water
 const getWeeklyWaterDates = date => {
   return hydrationUser.getWeeklyWaterIntake(date).map(day => day.date);
 };
@@ -285,7 +303,8 @@ let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
           .getWeeklyWaterIntake(todayDate)
           .map(day => day.ounces),
         borderWidth: 1,
-        fill: false
+        fill: true,
+        backgroundColor: '#45aaf2'
       }
     ]
   },
@@ -304,7 +323,85 @@ let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
       ]
     },
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: false
   }
 });
+
+// * ALL TIME ACTIVITY (STEPS)
+let allTimeActivityChart = $('#TEST-CHART-ACTIVITY-ALL');
+let xAllTimeActivityChart = new Chart(allTimeActivityChart, {
+  type: 'bar',
+  data: {
+    labels: activityRepo.getAllTimeDates(userID),
+    datasets: [
+      {
+        label: 'Steps',
+        backgroundColor: 'red',
+        data: activityRepo.getUserActivityAllTime(userID)
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'All Time Steps'
+    },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      ]
+    },
+    responsive: true,
+    maintainAspectRatio: false
+  }
+});
+
+// YOU and YOUR FRIENDS STEPS
+const getFriendsSteps = (currentUserFriends, todayDate) =>
+  activityRepo
+    .getFriendsListStepCount(currentUserFriends, todayDate)
+    .sort((a, b) => b.steps - a.steps);
+
+let friendsChart = $('#TEST-CHART-FRIENDS');
+let xFriendsChart = new Chart(friendsChart, {
+  type: 'horizontalBar',
+  data: {
+    labels: userRepo.getFriends(currentUser.friends).reduce((acc, friend) => {
+      acc.push(friend.name);
+      return acc;
+    }, []),
+    datasets: [
+      {
+        label: 'Steps',
+        backgroundColor: 'yellow',
+        data: [
+          activity.getWeeklySteps(todayDate),
+          getFriendsSteps(currentUser.friends, todayDate)
+        ]
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Weekly Steps'
+    },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      ]
+    },
+    responsive: true,
+    maintainAspectRatio: false
+  }
+});
+
 // });

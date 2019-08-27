@@ -35,6 +35,7 @@ describe('ACTIVITY REPOSITORY', () => {
       activityRepo.getAllUserAverage('2019/06/20', 'flightsOfStairs')
     ).to.equal(25);
   });
+
   it('should be able to return friends step count on user friends list', () => {
     expect(activityRepo.getFriendsListStepCount([3], '2019/06/20')).to.eql([
       {
@@ -42,6 +43,11 @@ describe('ACTIVITY REPOSITORY', () => {
         id: 3
       }
     ]);
+  });
+
+  it('should return user activity data for all time', () => {
+    console.log(activityRepo.getUserActivityAllTime(user1ID));
+    expect(activityRepo.getUserActivityAllTime(user1ID).length).to.equal(8);
   });
 });
 
