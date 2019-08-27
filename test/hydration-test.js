@@ -23,10 +23,6 @@ describe('HYDRATION REPOSITORY', () => {
 });
 
 describe('HYDRATION', () => {
-  it('should be a function', () => {
-    expect(Hydration).to.be.a('function');
-  });
-
   it('should be able to get user data from user ID', () => {
     let hydrationRepo = new HydrationRepository(hydrationData);
     let userDataHydrations = hydrationRepo.getUserHydrationByID(1);
