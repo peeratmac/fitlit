@@ -6,6 +6,8 @@
 
 ## Working Product
 
+![working-product-gif](screenshots/working-product.gif)
+
 ## Languages and Libraries
 
 - JavaScript
@@ -32,3 +34,7 @@
 - Create a data dashboard that is easy to use and displays information in a clear way
 
 ## Screenshots
+
+![desktop-view-1](screenshots/desktop-view-1.png)
+
+![desktop-view-2](screenshots/desktop-view-2.png)
