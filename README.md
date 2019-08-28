@@ -1,12 +1,12 @@
 # FitLit
 
-## [Link to Live Site](https://peeratmac.github.io/fitlit/src/index.html)
+## [Live Site](https://peeratmac.github.io/fitlit/src/index.html)
 
 ### [Kirk Veitch](https://github.com/kveitch) and [Peerat Sukcharoenyingyong](https://github.com/peeratmac)
 
 ## Working Product
 
-![working-product-gif](screenshots/working-product.gif)
+![working-product-gif](screenshots/working-product-2.gif)
 
 ## Languages and Libraries
 
@@ -38,3 +38,11 @@
 ![desktop-view-1](screenshots/desktop-view-1.png)
 
 ![desktop-view-2](screenshots/desktop-view-2.png)
+
+## Future Functionalities
+
+- Dark Mode to allow user to toggle on and off
+- Persist user section placements
+- Allow user to select an alternate color scheme for the app
+- Allow user to view data from any selected date
+- Allow user selection and ability to add new users
