@@ -160,41 +160,60 @@ const getWeeklySleepDates = date => {
 let lastWeekSleepHoursChart = $('#TEST-CHART-SLEEP-1');
 new Chart(lastWeekSleepHoursChart, {
   type: 'bar',
-
   data: {
     labels: getWeeklySleepDates(todayDate),
     datasets: [
       {
         label: 'Sleep Quality',
-        backgroundColor: [
-          '#45aaf2',
-          '#4b7bec',
-          '#a55eea',
-          '#26de81',
-          '#2bcbba',
-          '#a29bfe',
-          '#00b894'
-        ],
         data: getWeeklyQualitiesArray(todayDate),
-        borderWidth: 1,
-        borderColor: '#777',
+        backgroundColor: [
+          'rgba(69,170,242, 0.5)',
+          'rgba(0, 184, 148, 0.5)',
+          'rgba(165,94,234, 0.5)',
+          'rgba(75,123,236, 0.5)',
+          'rgba(43,203,186, 0.5)',
+          'rgba(162,155,254, 0.5)',
+          'rgba(38,222,129, 0.5)',
+        ],
+        borderColor: [
+          'rgba(69,170,242, 1)',
+          'rgba(0, 184, 148, 1)',
+          'rgba(165,94,234, 1)',
+          'rgba(75,123,236, 1)',
+          'rgba(43,203,186, 1)',
+          'rgba(162,155,254, 1)',
+          'rgba(38,222,129, 1)',
+        ],
+        borderWidth: 2,
+        type: 'line',
+        fill: false,
         hoverBorderWidth: 3,
-        hoverBorderColor: '#000'
+        // hoverBorderColor: '#000'
       },
       {
         label: 'Sleep Hours',
-        backgroundColor: [
-          '#45aaf2',
-          '#4b7bec',
-          '#a55eea',
-          '#26de81',
-          '#2bcbba',
-          '#a29bfe',
-          '#00b894'
-        ],
         data: getWeeklySleepsArray(todayDate),
-        type: 'line',
-        fill: false
+        backgroundColor: [
+          'rgba(69,170,242, 0.5)',
+          'rgba(0, 184, 148, 0.5)',
+          'rgba(165,94,234, 0.5)',
+          'rgba(75,123,236, 0.5)',
+          'rgba(43,203,186, 0.5)',
+          'rgba(162,155,254, 0.5)',
+          'rgba(38,222,129, 0.5)',
+        ],
+        type: 'bar',
+        fill: false,
+        hoverBorderWidth: 3,
+        hoverBorderColor: [ 
+          'rgba(69,170,242, 1)',
+          'rgba(0, 184, 148, 1)',
+          'rgba(165,94,234, 1)',
+          'rgba(75,123,236, 1)',
+          'rgba(43,203,186, 1)',
+          'rgba(162,155,254, 1)',
+          'rgba(38,222,129, 1)'
+        ]
       }
     ]
   },
@@ -213,6 +232,7 @@ new Chart(lastWeekSleepHoursChart, {
       ]
     },
     responsive: true,
+    hoverBorderWidth: 3,
     maintainAspectRatio: false
   }
 });
@@ -228,23 +248,31 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
       {
         label: 'Sleep Scores',
         backgroundColor: [
-          '#45aaf2',
-          '#4b7bec',
-          '#a55eea',
-          '#26de81',
-          '#2bcbba',
-          '#a29bfe',
-          '#00b894'
+          'rgba(69,170,242, 0.5)',
+          'rgba(0, 184, 148, 0.5)',
+          'rgba(165,94,234, 0.5)',
+          'rgba(75,123,236, 0.5)',
+          'rgba(43,203,186, 0.5)',
+          'rgba(162,155,254, 0.5)',
+          'rgba(38,222,129, 0.5)',
         ],
         data: weeklySleepScores,
-        borderWidth: 1,
         borderColor: '#777',
         hoverBorderWidth: 3,
-        hoverBorderColor: '#000'
+        hoverBorderColor: [ 
+          'rgba(69,170,242, 1)',
+          'rgba(0, 184, 148, 1)',
+          'rgba(165,94,234, 1)',
+          'rgba(75,123,236, 1)',
+          'rgba(43,203,186, 1)',
+          'rgba(162,155,254, 1)',
+          'rgba(38,222,129, 1)'
+      ]
       }
     ]
   },
   options: {
+    legend: false,
     title: {
       display: true
       // text: ''
@@ -275,28 +303,29 @@ let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
     datasets: [
       {
         label: 'Water Consumed (Ounces)',
-        backgroundColor: [
-          '#45aaf2',
-          '#4b7bec',
-          '#a55eea',
-          '#26de81',
-          '#2bcbba',
-          '#fed330',
-          '#00b894'
+        borderColor: [
+          'rgba(69,170,242, 1)',
+          'rgba(0, 184, 148, 1)',
+          'rgba(165,94,234, 1)',
+          'rgba(75,123,236, 1)',
+          'rgba(43,203,186, 1)',
+          'rgba(162,155,254, 1)',
+          'rgba(38,222,129, 1)',
         ],
         data: hydrationUser
           .getWeeklyWaterIntake(todayDate)
           .map(day => day.ounces),
-        borderWidth: 1,
-        fill: true,
-        backgroundColor: '#45aaf2'
+        borderWidth: 2,
+        // fill: true,
+        backgroundColor: 'rgba(69,170,242, 0.5)'
       }
     ]
   },
   options: {
+    legend: false,
     title: {
       display: true,
-      text: 'Weekly Water (Ounces)'
+      text: 'Ounces'
     },
     scales: {
       yAxes: [
@@ -321,15 +350,16 @@ let xAllTimeActivityChart = new Chart(allTimeActivityChart, {
     datasets: [
       {
         label: 'Steps',
-        backgroundColor: '#00b894',
+        backgroundColor: 'rgba(0, 184, 148, 0.5',
         data: activityRepo.getUserActivityAllTime(userID)
       }
     ]
   },
   options: {
+    legend: false,
     title: {
       display: true,
-      text: 'All Time Steps'
+      // text: 'All Time Steps'
     },
     scales: {
       yAxes: [
@@ -345,7 +375,7 @@ let xAllTimeActivityChart = new Chart(allTimeActivityChart, {
   }
 });
 
-//Packery and Dragability
+// Packery and Dragability
 let $grid = $('.grid').packery({
   itemSelector: '.grid-item',
   columnWidth: 100
@@ -357,8 +387,6 @@ $('.grid').packery({
   percentPosition: true,
   columnWidth: 100
 });
-
-let $draggable = $('.draggable').draggabilly('enable');
 
 $grid.find('.grid-item').each(function(i, gridItem) {
   let draggie = new Draggabilly(gridItem);
