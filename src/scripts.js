@@ -173,7 +173,7 @@ new Chart(lastWeekSleepHoursChart, {
           'rgba(75,123,236, 0.5)',
           'rgba(43,203,186, 0.5)',
           'rgba(162,155,254, 0.5)',
-          'rgba(38,222,129, 0.5)',
+          'rgba(38,222,129, 0.5)'
         ],
         borderColor: [
           'rgba(69,170,242, 1)',
@@ -182,13 +182,12 @@ new Chart(lastWeekSleepHoursChart, {
           'rgba(75,123,236, 1)',
           'rgba(43,203,186, 1)',
           'rgba(162,155,254, 1)',
-          'rgba(38,222,129, 1)',
+          'rgba(38,222,129, 1)'
         ],
         borderWidth: 2,
         type: 'line',
         fill: false,
-        hoverBorderWidth: 3,
-        // hoverBorderColor: '#000'
+        hoverBorderWidth: 3
       },
       {
         label: 'Sleep Hours',
@@ -200,12 +199,12 @@ new Chart(lastWeekSleepHoursChart, {
           'rgba(75,123,236, 0.5)',
           'rgba(43,203,186, 0.5)',
           'rgba(162,155,254, 0.5)',
-          'rgba(38,222,129, 0.5)',
+          'rgba(38,222,129, 0.5)'
         ],
         type: 'bar',
         fill: false,
         hoverBorderWidth: 3,
-        hoverBorderColor: [ 
+        hoverBorderColor: [
           'rgba(69,170,242, 1)',
           'rgba(0, 184, 148, 1)',
           'rgba(165,94,234, 1)',
@@ -237,7 +236,7 @@ new Chart(lastWeekSleepHoursChart, {
   }
 });
 
-// * Sleep Scores
+// * Sleep Scores Chart
 let weeklySleepScores = sleepUser.getWeeklySleepScores(todayDate);
 let lastWeekSleepScoresChart = $('#TEST-CHART-SLEEP-2');
 let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
@@ -254,12 +253,12 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
           'rgba(75,123,236, 0.5)',
           'rgba(43,203,186, 0.5)',
           'rgba(162,155,254, 0.5)',
-          'rgba(38,222,129, 0.5)',
+          'rgba(38,222,129, 0.5)'
         ],
         data: weeklySleepScores,
         borderColor: '#777',
         hoverBorderWidth: 3,
-        hoverBorderColor: [ 
+        hoverBorderColor: [
           'rgba(69,170,242, 1)',
           'rgba(0, 184, 148, 1)',
           'rgba(165,94,234, 1)',
@@ -267,7 +266,7 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
           'rgba(43,203,186, 1)',
           'rgba(162,155,254, 1)',
           'rgba(38,222,129, 1)'
-      ]
+        ]
       }
     ]
   },
@@ -275,7 +274,6 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
     legend: false,
     title: {
       display: true
-      // text: ''
     },
     scales: {
       yAxes: [
@@ -291,7 +289,7 @@ let xlastWeekSleepScoresChart = new Chart(lastWeekSleepScoresChart, {
   }
 });
 
-// * Weekly Water
+// * Weekly Water Chart
 const getWeeklyWaterDates = date => {
   return hydrationUser.getWeeklyWaterIntake(date).map(day => day.date);
 };
@@ -310,7 +308,7 @@ let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
           'rgba(75,123,236, 1)',
           'rgba(43,203,186, 1)',
           'rgba(162,155,254, 1)',
-          'rgba(38,222,129, 1)',
+          'rgba(38,222,129, 1)'
         ],
         data: hydrationUser
           .getWeeklyWaterIntake(todayDate)
@@ -341,7 +339,7 @@ let xLastWeekWaterChart = new Chart(lastWeekWaterChart, {
   }
 });
 
-// * ALL TIME ACTIVITY (STEPS)
+// * All Time Activity (Steps)
 let allTimeActivityChart = $('#TEST-CHART-ACTIVITY-ALL');
 let xAllTimeActivityChart = new Chart(allTimeActivityChart, {
   type: 'bar',
@@ -358,8 +356,7 @@ let xAllTimeActivityChart = new Chart(allTimeActivityChart, {
   options: {
     legend: false,
     title: {
-      display: true,
-      // text: 'All Time Steps'
+      display: true
     },
     scales: {
       yAxes: [
@@ -375,7 +372,7 @@ let xAllTimeActivityChart = new Chart(allTimeActivityChart, {
   }
 });
 
-// Packery and Dragability
+// Packery and Draggabilly
 let $grid = $('.grid').packery({
   itemSelector: '.grid-item',
   columnWidth: 100
@@ -392,5 +389,3 @@ $grid.find('.grid-item').each(function(i, gridItem) {
   let draggie = new Draggabilly(gridItem);
   $grid.packery('bindDraggabillyEvents', draggie);
 });
-
-// end Packery and Dragability
