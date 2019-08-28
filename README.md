@@ -4,6 +4,8 @@
 
 ### [Kirk Veitch](https://github.com/kveitch) and [Peerat Sukcharoenyingyong](https://github.com/peeratmac)
 
+## Working Product
+
 ## Languages and Libraries
 
 - JavaScript
@@ -28,3 +30,5 @@
 - Use object and array prototype methods to perform data manipulation
 - Display information on the page while maintaining ability to test class properties and methods
 - Create a data dashboard that is easy to use and displays information in a clear way
+
+## Screenshots
