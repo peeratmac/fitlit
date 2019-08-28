@@ -39,6 +39,8 @@
 
 ![desktop-view-2](screenshots/desktop-view-2.png)
 
+![desktop-view-3-dark-mode](screenshots/desktop-view-3.png)
+
 ## Future Functionalities
 
 - Dark Mode to allow user to toggle on and off
