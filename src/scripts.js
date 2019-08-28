@@ -31,9 +31,7 @@ $('.address').text(currentUser.address);
 $('.email').text(currentUser.email);
 $('.stride').text(currentUser.strideLength);
 $('.water').text(dailyWaterIntake);
-
 $('.user-sleep').text(lastNightSleep);
-
 $('.jq-all-time-sleep-average').text(sleepUser.averageDailySleep(userID));
 $('.jq-all-time-quality-average').text(sleepUser.averageSleepQuality(userID));
 $('.jq-percent-achieve').text(
@@ -48,19 +46,15 @@ $('.active-minutes').text(
 $('.current-flight-of-stairs').text(
   activity.returnCurrentActivityDatum(todayDate, 'flightsOfStairs')
 );
-
 $('.miles-walked').text(activity.calculateMilesWalked(todayDate, currentUser));
 
 $('.weekly-minutes-active').text(
   activity.getWeekAverageActivity(todayDate, 'minutesActive')
 );
-
 $('.weekly-steps').text(activity.getWeekAverageActivity(todayDate, 'numSteps'));
-
 $('.weekly-stairs').text(
   activity.getWeekAverageActivity(todayDate, 'flightsOfStairs')
 );
-
 $('.all-average-steps').text(
   activityRepo.getAllUserAverage(todayDate, 'numSteps')
 );
@@ -389,3 +383,12 @@ $grid.find('.grid-item').each(function(i, gridItem) {
   let draggie = new Draggabilly(gridItem);
   $grid.packery('bindDraggabillyEvents', draggie);
 });
+
+// Toggle Dark Mode
+$('.toggle-dark').on('click', toggleDark);
+function toggleDark() {
+  $('body').toggleClass('dark');
+  $('header').toggleClass('dark');
+  $('section').toggleClass('dark');
+  $('button').toggleClass('dark');
+}

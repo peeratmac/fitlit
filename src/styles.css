@@ -101,7 +101,7 @@ section:hover {
 
 .grid-item.is-dragging,
 .grid-item.is-positioning-post-drag {
-  background: rgb(83, 170, 83);
+  background: rgba(83, 170, 83, 0.4);
   z-index: 2;
 }
 
@@ -129,6 +129,10 @@ section:hover {
 }
 
 .dark {
-  background-color: #343d46;
-  color: rgb(191, 191, 191);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+button {
+  width: 20px;
 }
