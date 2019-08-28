@@ -6,7 +6,7 @@
 
 ## Working Product
 
-![working-product-gif](screenshots/working-product.gif)
+![working-product-gif](screenshots/working-product-2.gif)
 
 ## Languages and Libraries
 
