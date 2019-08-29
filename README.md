@@ -43,8 +43,10 @@
 
 ## Future Functionalities
 
-- Dark Mode to allow user to toggle on and off
+- Menu systen in the upper right courner giving user access to more options
+- Dark Mode should be nested in this menu
 - Persist user section placements
 - Allow user to select an alternate color scheme for the app
 - Allow user to view data from any selected date
-- Allow user selection and ability to add new users
+- Allow user selection
+- Ability to add new users
