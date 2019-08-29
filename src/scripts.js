@@ -19,59 +19,87 @@ const weeklyWaterIntake = hydrationUser.getWeeklyWaterIntake(todayDate);
 const lastNightSleep = sleepUser.getHoursSleptByDate(todayDate, userID);
 const weeklySleepArray = sleepUser.getWeeklySleeps(todayDate, userID);
 const weeklySleepQualityArray = sleepUser.getWeeklyQualities(todayDate, userID);
+const weeklyWinnerId = currentUser.friends.concat(currentUser.id)
+.map(id => ({id: id, weeklySteps: activityRepo.weeklyStepTotal(id, todayDate)}))
+.sort((a, b) => b.weeklySteps - a.weeklySteps)[0].id;
+
+const weeklyWinner = userData.find(el => el.id === weeklyWinnerId).name;
 
 $('.user-name').text(currentUser.name);
 $('.user-first-name').text(currentUser.getFirstName());
+
 $('.user-step-goal').text(currentUser.dailyStepGoal);
+
 $('.average-all-step-goal').text(userRepo.averageUserStepGoal());
+
 $('.date-today').text(todayDate);
+
 $('.step-goal-card').text(currentUser.dailyStepGoal);
+
 $('.step-goal-percent').text(percentGlobalSteps);
+
 $('.address').text(currentUser.address);
+
 $('.email').text(currentUser.email);
+
 $('.stride').text(currentUser.strideLength);
+
 $('.water').text(dailyWaterIntake);
+
 $('.user-sleep').text(lastNightSleep);
+
 $('.jq-all-time-sleep-average').text(sleepUser.averageDailySleep(userID));
+
 $('.jq-all-time-quality-average').text(sleepUser.averageSleepQuality(userID));
+
 $('.jq-percent-achieve').text(
   activity.calculateStepGoalAchievement(currentUser) + '%'
 );
+
 $('.current-steps').text(
   activity.returnCurrentActivityDatum(todayDate, 'numSteps')
 );
+
 $('.active-minutes').text(
   activity.returnCurrentActivityDatum(todayDate, 'minutesActive')
 );
+
 $('.current-flight-of-stairs').text(
   activity.returnCurrentActivityDatum(todayDate, 'flightsOfStairs')
 );
+
 $('.miles-walked').text(activity.calculateMilesWalked(todayDate, currentUser));
 
 $('.weekly-minutes-active').text(
   activity.getWeekAverageActivity(todayDate, 'minutesActive')
 );
+
 $('.weekly-steps').text(activity.getWeekAverageActivity(todayDate, 'numSteps'));
+
 $('.weekly-stairs').text(
   activity.getWeekAverageActivity(todayDate, 'flightsOfStairs')
 );
+
 $('.all-average-steps').text(
   activityRepo.getAllUserAverage(todayDate, 'numSteps')
 );
+
 $('.all-average-minutes').text(
   activityRepo.getAllUserAverage(todayDate, 'minutesActive')
 );
+
 $('.all-average-stairs').text(
   activityRepo.getAllUserAverage(todayDate, 'flightsOfStairs')
 );
+
 $('.mountain').text(activity.compareMilesWalkedToHike(currentUser));
 
+$('.step-leader').append(`<h3>${weeklyWinner}</h3>`);
 activity.getDaysWithStepsTrend().forEach(day => {
   $('.day-streaks').prepend(`<p>${day}</p>`);
 });
 
-activityRepo
-  .getFriendsListStepCount(currentUser.friends, todayDate)
+activityRepo.getFriendsListStepCount(currentUser.friends, todayDate)
   .sort((a, b) => b.steps - a.steps)
   .forEach(friend => {
     $('.friend-list').append(
@@ -99,17 +127,15 @@ sleepUser.getWeeklyQualities(todayDate).forEach(night => {
   );
 });
 
-currentUser.friends
-  .concat(currentUser.id)
-  .map(id => ({
-    id: id,
-    weeklySteps: activityRepo.weeklyStepTotal(id, todayDate)
-  }))
+currentUser.friends.concat(currentUser.id)
+  .map(id => ({ id: id, weeklySteps: activityRepo.weeklyStepTotal(id, todayDate)}))
   .sort((a, b) => b.weeklySteps - a.weeklySteps)
   .forEach(friend => {
     if (friend.id === currentUser.id) {
       $('.jq-friend-week-steps').append(
-        `<b><li class="green" id="jq-ws-${friend.id}">${friend.weeklySteps}</li></b>`
+        `<b><li class="green" id="jq-ws-${friend.id}">
+          ${friend.weeklySteps}
+        </li></b>`
       );
     } else {
       $('.jq-friend-week-steps').append(
@@ -118,23 +144,18 @@ currentUser.friends
     }
   });
 
-userRepo
-  .getFriends(currentUser.friends.concat(currentUser.id))
+userRepo.getFriends(currentUser.friends.concat(currentUser.id))
   .forEach(friend => {
     $(`#jq-ws-${friend.id}`).prepend(`${friend.name}: `);
   });
 
-let weeklyWinnerId = currentUser.friends
-  .concat(currentUser.id)
-  .map(id => ({
-    id: id,
-    weeklySteps: activityRepo.weeklyStepTotal(id, todayDate)
-  }))
-  .sort((a, b) => b.weeklySteps - a.weeklySteps)[0].id;
-
-let weeklyWinner = userData.find(el => el.id === weeklyWinnerId).name;
-
-$('.step-leader').append(`<h3>${weeklyWinner}</h3>`);
+$('.toggle-dark').on('click', () => {
+  $('body').toggleClass('dark');
+  $('header').toggleClass('dark');
+  $('section').toggleClass('dark');
+  $('button').toggleClass('dark');
+  $('.toggle-dark').blur();
+})
 
 // ! * Chart.js
 Chart.defaults.global.defaultFontFamily = 'Livvic';
@@ -383,12 +404,3 @@ $grid.find('.grid-item').each(function(i, gridItem) {
   let draggie = new Draggabilly(gridItem);
   $grid.packery('bindDraggabillyEvents', draggie);
 });
-
-// Toggle Dark Mode
-$('.toggle-dark').on('click', toggleDark);
-function toggleDark() {
-  $('body').toggleClass('dark');
-  $('header').toggleClass('dark');
-  $('section').toggleClass('dark');
-  $('button').toggleClass('dark');
-}

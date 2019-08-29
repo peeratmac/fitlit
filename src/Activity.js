@@ -106,7 +106,9 @@ class Activity {
       totalMilesWalked / mountRainierSummitHike
     ).toFixed(1);
 
-    return `Your ${totalMilesWalked} lifetime miles is equivalent to ${timesYouHiked} times you have completed the Mount Rainier Standard Summit Hike`;
+    return `Your ${totalMilesWalked} lifetime miles is equivalent to 
+    ${timesYouHiked} times you could have completed the Mount Rainier 
+    Summit Hike.`;
   }
 }
 
