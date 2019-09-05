@@ -1,6 +1,7 @@
-const todayDate = `${new Date().getFullYear()}/${String(
-  new Date().getMonth() + 1
-).padStart(2, '0')}/${String(new Date().getDate()).padStart(2, '0')}`;
+const todayDate = '2019/09/22'
+// `${new Date().getFullYear()}/${String(
+//  new Date().getMonth() + 1
+//).padStart(2, '0')}/${String(new Date().getDate()).padStart(2, '0')}`;
 
 const userRepo = new UserRepository(userData);
 let userID = Math.ceil(Math.random() * userRepo.data.length);
